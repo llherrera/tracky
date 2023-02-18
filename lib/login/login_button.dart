@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracky/register/register_button.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -24,5 +25,46 @@ class LoginButton extends StatelessWidget {
       ),
     );
     return login_button;
+  }
+}
+
+class LoginForm extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Container(
+        margin: EdgeInsets.only(left: 20),
+        child: Column(
+          children: <Widget>[
+            Text('Create an account',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 50,
+                fontWeight: FontWeight.bold
+              )
+            ),
+            form(),
+            Spacer(flex: 1),
+            LoginButton(),
+            Spacer(flex: 1),
+            SignupButton(),
+          ]
+        ),
+      )
+    );
+  }
+}
+
+class form extends StatefulWidget {
+  const form({super.key});
+
+  @override
+  State<form> createState() => _formState();
+}
+
+class _formState extends State<form> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
