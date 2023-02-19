@@ -1,70 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:tracky/register/register_button.dart';
+import 'login_page.dart';
+import 'package:tracky/home/home_page.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final login_button = ElevatedButton(
-      onPressed: () {},
-      child: Text('Login',
+    final loginBtn = ElevatedButton(
+      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));},
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+      ),
+      child: const Text('Log in',
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
           fontWeight: FontWeight.bold
         )
       ),
+    );
+    return loginBtn;
+  }
+}
+
+class LoginButtonExp extends StatelessWidget {
+  const LoginButtonExp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final loginBtn = ElevatedButton(
+      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const homePage()));},
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
-        onPrimary: Colors.black,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+      ),
+      child: const Text('Log in',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        )
       ),
     );
-    return login_button;
-  }
-}
-
-class LoginForm extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        margin: EdgeInsets.only(left: 20),
-        child: Column(
-          children: <Widget>[
-            Text('Create an account',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 50,
-                fontWeight: FontWeight.bold
-              )
-            ),
-            form(),
-            Spacer(flex: 1),
-            LoginButton(),
-            Spacer(flex: 1),
-            SignupButton(),
-          ]
-        ),
-      )
-    );
-  }
-}
-
-class form extends StatefulWidget {
-  const form({super.key});
-
-  @override
-  State<form> createState() => _formState();
-}
-
-class _formState extends State<form> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+    return loginBtn;
   }
 }

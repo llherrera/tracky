@@ -3,7 +3,7 @@ import 'login/login_button.dart';
 import 'register/register_button.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Tracky',
     home: MyApp(),
@@ -11,6 +11,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -18,8 +21,8 @@ class MyApp extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 100),
-              child: Text('Tracky',
+              margin: const EdgeInsets.only(top: 100),
+              child: const Text('Tracky',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 50,
@@ -28,38 +31,17 @@ class MyApp extends StatelessWidget {
               ),
             )
           ),
-          Spacer(flex: 5),
-          Center( child: LoginButton() ),
-          Spacer(flex: 1),
+          const Spacer(flex: 5),
+          const Center( child: LoginButton() ),
+          const Spacer(flex: 1),
           Container( 
-            margin: EdgeInsets.only(bottom: 50),
-            child:Center(
+            margin: const EdgeInsets.only(bottom: 50),
+            child: const Center(
               child: SignupButton()
             )
           )
         ],
       )
-    );
-  }
-}
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
-      body: Center(
-        child: Column(),
-      ),
     );
   }
 }
