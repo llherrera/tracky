@@ -34,24 +34,26 @@ class LoginButtonExp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginBtn = ElevatedButton(
-      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const homePage()));},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+    final loginBtn = 
+      ElevatedButton(
+        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 60,vertical: 20)
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-      ),
-      child: const Text('Log in',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        )
-      ),
-    );
+        child: const Text('Log in',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+          )
+        ),
+      )
+    ;
     return loginBtn;
   }
 }

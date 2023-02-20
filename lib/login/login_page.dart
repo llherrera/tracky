@@ -10,21 +10,33 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        margin: const EdgeInsets.only(left: 20, right: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const <Widget>[
-            Text('Log in',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 50,
-                fontWeight: FontWeight.bold
-              )
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(top: 100),
+              child: const Text('Log in',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold
+                )
+              ),
             ),
-            Icon(Icons.account_circle, size: 200, color: Colors.white),
-            Spacer(flex: 1),
-            LoginButtonExp(),
-            SignupButton(),
+            const Spacer(flex: 1),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: const LoginForm()
+            ),
+            Container( 
+              margin: const EdgeInsets.only(bottom: 20),
+              child: const LoginButtonExp()
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 50),
+              child: const SignupButton()
+            ),
           ]
         ),
       )
@@ -32,11 +44,91 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class form extends StatelessWidget {
-  const form({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool _selected = false;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    const usernameField = TextField(
+      obscureText: false,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Username',
+        hintStyle: TextStyle(color: Colors.white),
+        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 2),
+          borderRadius: BorderRadius.all(Radius.circular(32))
+        )
+      )
+    );
+
+    const passwordField = TextField(
+      obscureText: false,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: 'Password',
+        hintStyle: TextStyle(color: Colors.white),
+        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 2),
+          borderRadius: BorderRadius.all(Radius.circular(32))
+        )
+      )
+    );
+
+    return Column(
+      children: <Widget>[
+        const Icon(Icons.account_circle, size: 40, color: Colors.white),
+        Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            children: const <Widget>[
+              usernameField,
+            ]
+          ),
+        ),
+
+        const Icon(Icons.lock, size: 40, color: Colors.white),
+        Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            children: const <Widget>[
+              passwordField,
+            ]
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            Checkbox(
+              activeColor: Colors.black,
+              checkColor:  Colors.white,
+              side: const BorderSide(color: Colors.white),
+              value: _selected,
+              onChanged: (value) {
+                setState( () {
+                  _selected = value!;
+                });
+              },
+            ),
+            const Text('Keep me logged in',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15
+              )
+            )
+          ]
+        )
+      ]
+    );
   }
 }

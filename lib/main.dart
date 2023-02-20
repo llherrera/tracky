@@ -32,8 +32,12 @@ class MyApp extends StatelessWidget {
             )
           ),
           const Spacer(flex: 5),
-          const Center( child: LoginButton() ),
-          const Spacer(flex: 1),
+          Container( 
+            margin: const EdgeInsets.only(bottom: 30),
+            child: const Center(
+              child: LoginButton()
+            )
+          ),
           Container( 
             margin: const EdgeInsets.only(bottom: 50),
             child: const Center(
