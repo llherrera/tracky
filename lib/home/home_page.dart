@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tracky/activity/activity_page.dart';
+import 'package:tracky/leadboard/leadboard_page.dart';
+import 'package:tracky/history/history_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,11 +67,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        children: <Widget>[
-          Container(
+    return Column(
+      children: <Widget>[
+        Container(
             margin: const EdgeInsets.only(top: 50),
             child: Row(
               children: [
@@ -92,75 +93,72 @@ class Home extends StatelessWidget {
               ],
             )
           ),
-          const Spacer(flex: 1),
-          OutlinedButton.icon(
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
-              side: const BorderSide(color: Colors.white, width: 2),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10)
+        const Spacer(flex: 1),
+        OutlinedButton.icon(
+          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const AddActivity()));},
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.white,
+            side: const BorderSide(color: Colors.white, width: 2),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))
             ),
-            icon: const Icon(Icons.add_circle_outline, color: Colors.white, size: 50,),
-            onPressed: () {},
-            label: const Text(
-              'Add Activity',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
+            padding: const EdgeInsets.symmetric(horizontal: 30)
+          ),
+          icon: const Icon(Icons.add_circle_outline, color: Colors.white, size: 50,),
+          label: const Text(
+            'Add Activity',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold
+            )
+          ),
+        ),
+        const Spacer(flex: 1),
+        Row(
+          children: [
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryPage()));}, 
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 80)
+                ),
+                child: Column(
+                  children: const <Widget>[
+                    Icon(Icons.history, color: Colors.black, size: 50,),
+                    Text('History', style: TextStyle(color: Colors.black),)
+                  ],
+                ),
               )
             ),
-          ),
-          const Spacer(flex: 1),
-          Row(
-            children: [
-              Flexible(
-                flex: 1,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 80)
+            const Spacer(flex: 1),
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PodiumPage()));}, 
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))
                   ),
-
-                  onPressed: () {}, 
-                  child: Column(
-                    children: const <Widget>[
-                      Icon(Icons.history, color: Colors.black, size: 50,),
-                      Text('History', style: TextStyle(color: Colors.black),)
-                    ],
-                  ),
-                )
-              ),
-              const Spacer(flex: 1),
-              Flexible(
-                flex: 1,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 90)
-                  ),
-
-                  onPressed: () {}, 
-                  child: Column(
-                    children: const <Widget>[
-                      Icon(Icons.leaderboard, color: Colors.black, size: 50,),
-                      Text('Leaderboard', style: TextStyle(color: Colors.black),)
-                    ],
-                  ),
-                )
-              ),
-            ],
-          ),
-        ]
-      ),
+                  padding: const EdgeInsets.symmetric(horizontal: 90)
+                ),
+                child: Column(
+                  children: const <Widget>[
+                    Icon(Icons.leaderboard, color: Colors.black, size: 50,),
+                    Text('Leaderboard', style: TextStyle(color: Colors.black),)
+                  ],
+                ),
+              )
+            ),
+          ],
+        ),
+      ]
     );
   }
 }
@@ -170,11 +168,8 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text('Settings', style: TextStyle(color: Colors.white)),
-      ),
+    return const Center(
+      child: Text('Settings', style: TextStyle(color: Colors.white)),
     );
   }
 }
@@ -184,11 +179,8 @@ class Scores extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text('Scores', style: TextStyle(color: Colors.white)),
-      ),
+    return const Center(
+      child: Text('Scores', style: TextStyle(color: Colors.white)),
     );
   }
 }
@@ -198,10 +190,8 @@ class Account extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text('Account', style: TextStyle(color: Colors.white)),
-      ),);
+    return const Center(
+      child: Text('Account', style: TextStyle(color: Colors.white)),
+    );
   }
 }
