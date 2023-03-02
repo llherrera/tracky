@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'package:tracky/home/home_page.dart';
+import '../UI/login_page.dart';
+import 'package:tracky/UI/home_page.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});

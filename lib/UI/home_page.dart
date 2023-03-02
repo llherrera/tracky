@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tracky/activity/activity_page.dart';
-import 'package:tracky/leadboard/leadboard_page.dart';
-import 'package:tracky/history/history_page.dart';
+import 'package:tracky/UI/activity_page.dart';
+import 'package:tracky/UI/leadboard_page.dart';
+import 'package:tracky/UI/history_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

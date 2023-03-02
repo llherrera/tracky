@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'register_page.dart';
+import '../UI/register_page.dart';
 
 class SignupButton extends StatelessWidget {
   const SignupButton({super.key});
