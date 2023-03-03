@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../UI/login_page.dart';
+import '../../UI/login_page.dart';
 import 'package:tracky/UI/home_page.dart';
 
 class LoginButton extends StatelessWidget {
@@ -54,6 +54,34 @@ class LoginButtonExp extends StatelessWidget {
         ),
       )
     ;
+    return loginBtn;
+  }
+}
+
+class LoginButtonOutlined extends StatelessWidget {
+  const LoginButtonOutlined({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final loginBtn = OutlinedButton(
+      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));},
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        side: const BorderSide(color: Colors.white, width: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+      ),
+      child: const Text('Log in',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        )
+      ),
+    );
+
     return loginBtn;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tracky/Widgets/register_button.dart';
-import '../Widgets/login_button.dart';
+import 'package:tracky/Widgets/login_widgets/register_button.dart';
+import '../Widgets/login_widgets/login_button.dart';
 
 class Tracky extends StatelessWidget {
   const Tracky({super.key});
