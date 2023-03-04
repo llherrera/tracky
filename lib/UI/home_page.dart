@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tracky/UI/activity_page.dart';
 import 'package:tracky/UI/leadboard_page.dart';
 import 'package:tracky/UI/history_page.dart';
+import '../Widgets/home_widgets/user_info.dart';
+import '../Widgets/home_widgets/addActivity_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,7 +16,6 @@ class _HomePage extends State<HomePage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Settings(),
     Scores(),
     Account(),
   ];
@@ -42,10 +43,6 @@ class _HomePage extends State<HomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings, color: Colors.black),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.leaderboard, color: Colors.black),
             label: 'Scores',
           ),
@@ -68,54 +65,17 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Container(
-            margin: const EdgeInsets.only(top: 50),
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1 ,
-                  child: Column(
-                    children: const <Widget>[
-                      Text('Welcolme', style: TextStyle(color: Colors.white),),
-                      Text('@username', style: TextStyle(color: Colors.white),)
-                    ],
-                  )
-                ),
-                const Spacer(flex: 1),
-                const Flexible(
-                  flex: 1, 
-                  child: Icon(
-                    Icons.account_circle,
-                    color: Colors.white
-                  )
-                ),
-              ],
-            )
-          ),
-        const Spacer(flex: 1),
-        OutlinedButton.icon(
-          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const AddActivity()));},
-          style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.white,
-            side: const BorderSide(color: Colors.white, width: 2),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 30)
-          ),
-          icon: const Icon(Icons.add_circle_outline, color: Colors.white, size: 50,),
-          label: const Text(
-            'Add Activity',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold
-            )
-          ),
-        ),
-        const Spacer(flex: 1),
-        Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      /**
+       * userinfo
+       * addActivity
+       * ???
+       */
+      children: const <Widget>[
+        UserInfo(),
+        AddActivityButton(),
+        Padding(padding: EdgeInsets.only(bottom: 20)),
+        /*Row(
           children: [
             Flexible(
               flex: 1,
@@ -157,7 +117,7 @@ class Home extends StatelessWidget {
               )
             ),
           ],
-        ),
+        ),*/
       ]
     );
   }
@@ -169,7 +129,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Settings', style: TextStyle(color: Colors.white)),
+      child: Text('Settin2gs', style: TextStyle(color: Colors.white)),
     );
   }
 }

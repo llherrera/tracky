@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'username_field.dart';
-import 'password_field.dart';
+import 'textfields.dart';
 import 'checkbox.dart';
-import 'email_field.dart';
 
 class SignupForm extends StatelessWidget {
   const SignupForm({super.key});

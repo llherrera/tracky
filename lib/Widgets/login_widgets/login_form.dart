@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'username_field.dart';
-import 'password_field.dart';
+import 'textfields.dart';
 import 'checkbox.dart';
 
 class LoginForm extends StatelessWidget {
