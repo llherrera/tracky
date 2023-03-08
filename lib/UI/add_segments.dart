@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import '../Widgets/zCommon_widgets/backArrow_button.dart';
-import '../Widgets/activity_widgets/choose_activity.dart';
-import '../Widgets/activity_widgets/start_button.dart';
 
-class AddActivity extends StatelessWidget {
-  const AddActivity({super.key});
+class AddSegment extends StatelessWidget {
+  const AddSegment({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +22,10 @@ class AddActivity extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            //const BackArrowBtn(),
-            const Text('Type of activity', style: TextStyle(color: Colors.white, fontSize: 30),),
+            const Text('Add segment', style: TextStyle(color: Colors.white, fontSize: 30),),
             /**
-             * electionButton 
-             * maps*/
-            
+             * textField 
+             * ListView*/
           ],
         ),
       )
