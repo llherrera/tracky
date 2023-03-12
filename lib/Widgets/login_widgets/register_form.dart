@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../UI/login_page.dart';
 import '../../UI/home_page.dart';
 
@@ -46,7 +47,7 @@ class SignupButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final btn = ElevatedButton(
-      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage()));},
+      onPressed: () {Get.off(() => const HomePage());},
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2F7694),
         foregroundColor: Colors.white,
@@ -73,7 +74,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final btn = ElevatedButton(
-      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));},
+      onPressed: () {Get.off(() => const LoginPage());},
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.white,
