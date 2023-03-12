@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tracky/Widgets/login_widgets/login_button.dart';
-import '../Widgets/login_widgets/register_button.dart';
 import '../Widgets/login_widgets/register_form.dart';
 
 class SignupPage extends StatelessWidget {
@@ -8,37 +6,51 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color(0xFF4093CE),
+            Color(0xFF9BCEF3),
+          ]
+        )
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 50),
-              child: const Text('Create an account',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold
-                )
+            const ClipRect(
+              child: Align(
+                alignment: Alignment.topCenter,
+                heightFactor: 1,
+                widthFactor: 1,
+                child: Image(
+                  image: AssetImage('assets/images/testee.png'),
+
+                ),
               ),
             ),
-            const Spacer(flex: 1),
             Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: const SignupForm()
-            ),
-            Container( 
-              margin: const EdgeInsets.only(bottom: 20),
-              child: const SignupButtonElevated()
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: const Text('Create Account', style: TextStyle(color: Colors.white, fontSize: 50),),
             ),
             Container(
-              margin: const EdgeInsets.only(bottom: 50),
-              child: const LoginButtonOutlined()
+              decoration: BoxDecoration(
+                color: const Color(0xFFE5E5E5),
+                borderRadius: BorderRadius.circular(10)
+              ),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: const SignupForm(),
+              )
             ),
-          ]
+            const Padding(padding: EdgeInsets.only(bottom: 20)),
+          ],
         ),
       )
     );
