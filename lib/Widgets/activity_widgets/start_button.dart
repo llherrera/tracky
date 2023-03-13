@@ -8,16 +8,23 @@ class StartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
-        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const SummaryPage()));},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SummaryPage()));
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 15, 176, 31),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+            minimumSize: const Size(180, 60),
           ),
-        ),
-        icon: const Icon(Icons.play_arrow, color: Colors.black),
-        label: const Text('Start', style: TextStyle(color: Colors.black))
-      ),
+          icon: const Icon(
+            Icons.play_arrow,
+            color: Colors.white,
+            size: 35,
+          ),
+          label: const Text('Start',
+              style: TextStyle(color: Colors.white, fontSize: 25))),
     );
   }
 }
