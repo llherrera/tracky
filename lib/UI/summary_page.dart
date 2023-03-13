@@ -17,7 +17,14 @@ class _SummaryPageState extends State<SummaryPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                color: const Color.fromARGB(255, 64, 147, 206),
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                      Color(0xFF4093CE),
+                      Color(0xFF9BCEF3),
+                    ])),
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
                   children: <Widget>[
