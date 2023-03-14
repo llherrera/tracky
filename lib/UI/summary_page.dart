@@ -28,19 +28,7 @@ class _SummaryPageState extends State<SummaryPage> {
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
                   children: <Widget>[
-                    //FILA 1 - PARA EL ICONO DE VOLVER ATRÁS
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                              size: 30),
-                          color: Colors.white,
-                          padding: const EdgeInsets.only(top: 5.0, left: 10.0),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30.0),
+                    const SizedBox(height: 60.0),
                     //FILA 2 - PARA EL TITULO Y EL ICONO DE CRONOMETRO
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

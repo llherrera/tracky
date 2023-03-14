@@ -22,24 +22,7 @@ class AddActivity extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              //const BackArrowBtn(),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-              ),
+              const SizedBox(height: 40),
               Container(
                 alignment: Alignment.topCenter,
                 child: const Text(
@@ -75,7 +58,7 @@ class AddActivity extends StatelessWidget {
                   ),
                 ),
               ),
-
+              const SizedBox(height: 5),
               //Button
               Container(
                   decoration: BoxDecoration(

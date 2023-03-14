@@ -248,17 +248,26 @@ class Leaderboard extends StatelessWidget {
                     const SizedBox(height: 80.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Agregar Segmento',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            // Agregar funcionalidades del botón aquí
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            side: const BorderSide(
+                                width: 3.0, color: Colors.white),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 35, vertical: 15),
+                          ),
+                          child: const Text(
+                            'Agregar Segmento +',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
-                        SizedBox(width: 20),
-                        Icon(Icons.add, color: Colors.white, size: 30),
                       ],
                     ),
                   ],

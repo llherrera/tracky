@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tracky/UI/profile_page.dart';
+
+import 'home_page.dart';
 
 class EditarInfo extends StatefulWidget {
   const EditarInfo({Key? key}) : super(key: key);
@@ -40,18 +45,13 @@ class _EditarInfoState extends State<EditarInfo> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.offAll(() => const Profile());
+                          },
                           icon: const Icon(Icons.arrow_back_ios_new_outlined,
                               size: 40),
                           color: Colors.white,
                           padding: const EdgeInsets.only(top: 5.0, left: 5.0),
-                        ),
-                        const SizedBox(height: 20.0, width: 230),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.logout, size: 40),
-                          color: Colors.white,
-                          padding: const EdgeInsets.only(top: 5.0, right: 5.0),
                         ),
                       ],
                     ),
@@ -202,7 +202,7 @@ class _EditarInfoState extends State<EditarInfo> {
                       children: [
                         OutlinedButton(
                           onPressed: () {
-                            // Agregar funcionalidades del boton aqui
+                            Get.off(() => const HomePage());
                           },
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),
