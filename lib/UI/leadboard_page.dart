@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tracky/UI/summary_page.dart';
 
 TextEditingController _controller = TextEditingController();
 String _searchText = "";
@@ -44,7 +47,7 @@ class Leaderboard extends StatelessWidget {
                       children: const [
                         Padding(padding: EdgeInsets.all(40)),
                         Text(
-                          'Positions Table',
+                          'Leaderboard',
                           style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -251,7 +254,7 @@ class Leaderboard extends StatelessWidget {
                       children: [
                         OutlinedButton(
                           onPressed: () {
-                            // Agregar funcionalidades del botón aquí
+                            Get.off(() => const SummaryPage());
                           },
                           style: OutlinedButton.styleFrom(
                             shape: const StadiumBorder(),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:tracky/UI/home_page.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -123,7 +126,7 @@ class _SummaryPageState extends State<SummaryPage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            // Agregar funcionalidades del boton aqui
+                            Get.off(() => const HomePage());
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
