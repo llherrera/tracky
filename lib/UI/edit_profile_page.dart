@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tracky/UI/profile_page.dart';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'home_page.dart';
 
@@ -20,6 +23,21 @@ class _EditarInfoState extends State<EditarInfo> {
   String? _telephone = '';
   double? _weight = 0.0;
   double? _height = 0.0;
+
+  late File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +107,14 @@ class _EditarInfoState extends State<EditarInfo> {
                               ),
                               child: IconButton(
                                 icon: const Icon(Icons.photo_camera, size: 70),
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                                onPressed: () {
-                                  // TODO: implementar el foto upload
+                                onPressed: () async {
+                                  final pickedFile = await ImagePicker()
+                                      .getImage(source: ImageSource.gallery);
+                                  if (pickedFile != null) {
+                                    setState(() {
+                                      _image = File(pickedFile.path);
+                                    });
+                                  }
                                 },
                               ),
                             ),
