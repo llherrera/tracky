@@ -18,7 +18,6 @@ class SignupForm extends StatelessWidget {
         SignupButton(),
         Center(child: Text('----------or-----------')),
         LoginButton(),
-//        ElevatedButton(onPressed: onPressed, child: child)
       ],
     );
   }

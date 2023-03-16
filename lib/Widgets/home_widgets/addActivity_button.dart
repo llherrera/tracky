@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../UI/activity_page.dart';
 
 class AddActivityButton extends StatelessWidget {
@@ -7,7 +8,7 @@ class AddActivityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addActBtn = OutlinedButton(
-      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const AddActivity()));},
+      onPressed: () {Get.to(() => const AddActivity());},
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.white,
         minimumSize: const Size.fromHeight(50),

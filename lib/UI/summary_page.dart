@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tracky/UI/home_page.dart';
+import '../Widgets/summary_widgets/save_delete_buttons.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({Key? key}) : super(key: key);
@@ -17,9 +17,8 @@ class _SummaryPageState extends State<SummaryPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
+          Expanded(child: SingleChildScrollView(child: 
+              Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -30,6 +29,7 @@ class _SummaryPageState extends State<SummaryPage> {
                     ])),
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     const SizedBox(height: 60.0),
                     //FILA 2 - PARA EL TITULO Y EL ICONO DE CRONOMETRO
@@ -58,112 +58,66 @@ class _SummaryPageState extends State<SummaryPage> {
                     ),
                     const SizedBox(height: 40.0),
                     //FILA 3 - PARA EL NOMBRE DEL EJERCICIO
-                    Row(
-                      children: const [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20.0, right: 20),
-                            child: Text(
-                              'Running',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20),
+                      child: Text(
+                        'Running',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                          fontStyle: FontStyle.italic,
                         ),
-                      ],
+                      ),
                     ),
                     // FILA 4 - PARA EL MAPA
                     const SizedBox(height: 15.0),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.asset(
-                            'assets/images/mapa.png',
-                            height: MediaQuery.of(context).size.height * 0.25,
-                          ),
-                        ),
-                      ],
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        'assets/images/mapa.png',
+                        height: MediaQuery.of(context).size.height * 0.25,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                      )
                     ),
-
                     // FILA 5 - PARA EL TEXTO DE KILOMETROS
                     const SizedBox(height: 30.0),
-                    Row(
-                      children: const [
-                        Padding(padding: EdgeInsets.only(left: 20)),
-                        Text(
-                          'Km: 90km',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                    const Padding(padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Km: 90km',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
                         ),
-                      ],
+                      ),
                     ),
                     // FILA 6 - PARA EL TEXTO DE TIEMPO
                     const SizedBox(height: 10),
-                    Row(
-                      children: const [
-                        Padding(padding: EdgeInsets.only(left: 20)),
-                        Text(
-                          'Time: 2:00:00',
-                          style: TextStyle(
+                    const Padding(padding: EdgeInsets.only(left: 20),
+                        child: 
+                          Text(
+                            'Time: 2:00:00',
+                            style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
-                              color: Colors.white),
+                              color: Colors.white
+                            ),
                         ),
-                      ],
                     ),
                     // FILA 7 - PARA LOS BOTONES DE GUARDAR Y ELIMINAR
                     const SizedBox(height: 40),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Get.off(() => const HomePage());
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: Colors.green,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                          ),
-                          child: const Text(
-                            'Save',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const <Widget>[
+                        Expanded(
+                          flex: 4,
+                          child: SaveActBtn(),
                         ),
-                        const SizedBox(
-                            width: 10), // Añadir espacio entre botones
-                        ElevatedButton(
-                          onPressed: () {
-                            // Agregar funcionalidades del botón aquí
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: Colors.red,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20),
-                          ),
-                          child: const Text(
-                            'Delete',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
+                        Spacer(), // Añadir espacio entre botones
+                        Expanded(
+                          flex: 4,
+                          child: DeleteActBtn(),
+                        )
                       ],
                     ),
                     const SizedBox(height: 100),

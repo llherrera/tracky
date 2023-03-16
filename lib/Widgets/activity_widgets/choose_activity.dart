@@ -32,45 +32,41 @@ class _SelectActivityState extends State<SelectActivity> {
             });
           },
           children: <Widget>[
-            Row(
-              children: const <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                ),
-                Icon(
-                  Icons.directions_run,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                Text(
-                  'Sprint',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                ),
-              ],
+            SizedBox(
+              width: (MediaQuery.of(context).size.width - 60) / 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(
+                    Icons.directions_run,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Text(
+                    'Sprint',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ],
+              ),
             ),
-            Row(
-              children: const <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                ),
-                Icon(
-                  Icons.directions_bike,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                Text(
-                  'Cycling',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                ),
-              ],
+            SizedBox(
+              width: (MediaQuery.of(context).size.width - 60) / 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(
+                    Icons.directions_bike,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  Text(
+                    'Cycling',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ],
+              ),
             ),
           ],
-        ));
+      ));
   }
 }
