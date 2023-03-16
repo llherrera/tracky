@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../UI/summary_page.dart';
 
 class StartButton extends StatelessWidget {
@@ -8,10 +9,7 @@ class StartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SummaryPage()));
-          },
+          onPressed: () {Get.to(() => const SummaryPage());},
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 15, 176, 31),
             shape: const RoundedRectangleBorder(

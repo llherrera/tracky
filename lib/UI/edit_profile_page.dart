@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tracky/UI/profile_page.dart';
 
 import 'home_page.dart';
@@ -46,7 +45,7 @@ class _EditarInfoState extends State<EditarInfo> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Get.offAll(() => const Profile());
+                            Get.back();
                           },
                           icon: const Icon(Icons.arrow_back_ios_new_outlined,
                               size: 40),
@@ -58,6 +57,7 @@ class _EditarInfoState extends State<EditarInfo> {
                     const SizedBox(height: 50.0),
                     // ROW 2
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           children: const [
@@ -65,13 +65,13 @@ class _EditarInfoState extends State<EditarInfo> {
                             Text(
                               'Tania',
                               style: TextStyle(
-                                  fontSize: 60,
+                                  fontSize: 50,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
                             SizedBox(height: 10.0),
                             Text(
-                              'Barranquilla, Atlantico',
+                              'Barranquilla,\nAtlantico',
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.normal,

@@ -10,8 +10,8 @@ class AddActivity extends StatelessWidget {
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
               Color(0xFF4093CE),
               Color(0xFF9BCEF3),
@@ -19,10 +19,10 @@ class AddActivity extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Container(
                 alignment: Alignment.topCenter,
                 child: const Text(
@@ -33,21 +33,9 @@ class AddActivity extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              //electionButton
+              const SelectActivity(),
               Container(
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(10)),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    child: const SelectActivity(),
-                  )),
-
-              //maps
-              Container(
-                padding: EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
@@ -60,19 +48,10 @@ class AddActivity extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               //Button
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(10)),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    child: const StartButton(),
-                  )),
+              const StartButton(),
             ],
           ),
-        ));
+        )
+    );
   }
 }

@@ -18,12 +18,6 @@ class LoginForm extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: const <Widget>[
-            /*Flexible(
-              child: OutlinedButton(
-                onPressed: () {},
-                child: const Text('espacio', style: TextStyle(color: Colors.transparent),)
-              )
-            ),*/
             Flexible(
               child: ForgotPasswordBtn(),
             )
@@ -33,7 +27,6 @@ class LoginForm extends StatelessWidget {
         const LoginButton(),
         const Center(child: Text('----------or-----------')),
         const RegisterButton()
-//        ElevatedButton(onPressed: onPressed, child: child)
       ],
     );
   }
