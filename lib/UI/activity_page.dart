@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/activity_widgets/start_button.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddActivity extends StatelessWidget {
   const AddActivity({super.key});
@@ -38,20 +39,51 @@ class AddActivity extends StatelessWidget {
                 padding: const EdgeInsets.all(30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/mapa_start.png',
-                    width: 200,
-                    height: 300,
-                    fit: BoxFit.cover,
+                  child: MapaGoogle(
+                    apiKey: 'YOUR_API_KEY_HERE',
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(37.77483, -122.41942), // San Francisco
+                      zoom: 12,
+                    ),
+                    markers: {
+                      const Marker(
+                        markerId: MarkerId('marker1'),
+                        position: LatLng(37.77483, -122.41942), // San Francisco
+                        infoWindow: InfoWindow(title: 'Marker 1'),
+                      ),
+                    },
                   ),
                 ),
               ),
+
               const SizedBox(height: 5),
               //Button
               const StartButton(),
             ],
           ),
-        )
+        ));
+  }
+}
+
+class MapaGoogle extends StatelessWidget {
+  final String apiKey;
+  final CameraPosition initialCameraPosition;
+  final Set<Marker> markers;
+
+  const MapaGoogle({
+    super.key,
+    required this.apiKey,
+    required this.initialCameraPosition,
+    required this.markers,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: initialCameraPosition,
+      markers: markers,
+      onMapCreated: (GoogleMapController controller) {},
     );
   }
 }
