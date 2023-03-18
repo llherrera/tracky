@@ -36,11 +36,12 @@ class AddActivity extends StatelessWidget {
               ),
               const SelectActivity(),
               Container(
+                height: 500,
                 padding: const EdgeInsets.all(30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: MapaGoogle(
-                    apiKey: 'YOUR_API_KEY_HERE',
+                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(37.77483, -122.41942), // San Francisco
                       zoom: 12,

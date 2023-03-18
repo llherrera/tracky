@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tracky/UI/profile_page.dart';
+
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 import 'home_page.dart';
@@ -28,14 +28,12 @@ class _EditarInfoState extends State<EditarInfo> {
   final picker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
+      } else {}
     });
   }
 
@@ -111,7 +109,7 @@ class _EditarInfoState extends State<EditarInfo> {
                                 icon: const Icon(Icons.photo_camera, size: 70),
                                 onPressed: () async {
                                   final pickedFile = await ImagePicker()
-                                      .getImage(source: ImageSource.gallery);
+                                      .pickImage(source: ImageSource.gallery);
                                   if (pickedFile != null) {
                                     setState(() {
                                       _image = File(pickedFile.path);

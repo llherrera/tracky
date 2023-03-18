@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tracky/UI/home_page.dart';
 import '../Widgets/summary_widgets/save_delete_buttons.dart';
 
 class SummaryPage extends StatefulWidget {
@@ -17,8 +15,9 @@ class _SummaryPageState extends State<SummaryPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(child: SingleChildScrollView(child: 
-              Container(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -72,37 +71,35 @@ class _SummaryPageState extends State<SummaryPage> {
                     // FILA 4 - PARA EL MAPA
                     const SizedBox(height: 15.0),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(
-                        'assets/images/mapa.png',
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                      )
-                    ),
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          'assets/images/mapa.png',
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                        )),
                     // FILA 5 - PARA EL TEXTO DE KILOMETROS
                     const SizedBox(height: 30.0),
-                    const Padding(padding: EdgeInsets.only(left: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
                       child: Text(
                         'Km: 90km',
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                        ),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                     // FILA 6 - PARA EL TEXTO DE TIEMPO
                     const SizedBox(height: 10),
-                    const Padding(padding: EdgeInsets.only(left: 20),
-                        child: 
-                          Text(
-                            'Time: 2:00:00',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white
-                            ),
-                        ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Time: 2:00:00',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white),
+                      ),
                     ),
                     // FILA 7 - PARA LOS BOTONES DE GUARDAR Y ELIMINAR
                     const SizedBox(height: 40),
