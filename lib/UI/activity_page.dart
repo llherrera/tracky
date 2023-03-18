@@ -36,11 +36,11 @@ class AddActivity extends StatelessWidget {
               ),
               const SelectActivity(),
               Container(
-                height: 500,
+                height: 250,
                 padding: const EdgeInsets.all(30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: MapaGoogle(
+                  child: MapGoogle(
                     apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(37.77483, -122.41942), // San Francisco
@@ -66,12 +66,12 @@ class AddActivity extends StatelessWidget {
   }
 }
 
-class MapaGoogle extends StatelessWidget {
+class MapGoogle extends StatelessWidget {
   final String apiKey;
   final CameraPosition initialCameraPosition;
   final Set<Marker> markers;
 
-  const MapaGoogle({
+  const MapGoogle({
     super.key,
     required this.apiKey,
     required this.initialCameraPosition,
