@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Data/user.dart';
 import 'profile_page.dart';
 import 'leadboard_page.dart';
 import '../Widgets/home_widgets/addActivity_button.dart';
@@ -12,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
@@ -75,15 +78,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userP = Provider.of<UserProvider>(context);
+    final User? user = userP.user;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const <Widget>[
-            Text('Welcome Tania!', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-            Icon(Icons.person, color: Colors.white, size: 30,)
+          children: <Widget>[
+            Text('Welcome ${user?.getUsername == null ? 'User' : user?.getUsername}!', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+            const Icon(Icons.person, color: Colors.white, size: 30,)
           ],
         ),
         const Text("Let's exercise your day!", style: TextStyle(color: Colors.white, fontSize: 30), textAlign: TextAlign.right,),

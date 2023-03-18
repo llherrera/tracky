@@ -1,52 +1,127 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import '../../Data/user.dart';
 import '../../UI/login_page.dart';
 import '../../UI/home_page.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
+
+  @override
+  State<SignupForm> createState() => _SignupForm();
+}
+
+class _SignupForm extends State<SignupForm> {
+
+  String _username = '';
+  String _password = '';
+  String _email = '';
+
+  get username => _username;
+  get password => _password;
+  get email => _email;
+
+  void setUsername(String username) {
+    _username = username;
+  }
+  void setPassword(String password){
+    _password = password;
+  }
+  void setEmail(String email) {
+    _email = email;
+  }
+
+  Future<void> _submitForm() async {
+    final user = Provider.of<User>(context, listen: false);
+   // print(user.users);
+    if (_username.isNotEmpty || _password.isNotEmpty || _email.isNotEmpty) {
+      UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
+      User _user = User(_username, _email, _password);
+      user.addUser(_user);
+      userProvider.login(_user);
+      Get.off(() => const HomePage());
+      return;
+    } else {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) =>
+        AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Please fill in all the fields'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {Get.back();},
+              child: const Text('OK'),
+            )
+          ],
+        )
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: const <Widget>[
-        UsernameField(),
-        EmailField(),
-        PasswordField(),
-        SignupButton(),
-        Center(child: Text('----------or-----------')),
-        LoginButton(),
+      children: <Widget>[
+        usernameField(),
+        emailField(),
+        passwordField(),
+        signupButton(),
+        const Center(child: Text('----------or-----------')),
+        loginButton(),
       ],
     );
   }
-}
 
-class EmailField extends StatelessWidget {
-  const EmailField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TextField(
+  Widget emailField() {
+    return TextField(
       //obscureText: false,
-      style: TextStyle(color: Color(0xFF505050)),
-      decoration: InputDecoration(
+      style: const TextStyle(color: Color(0xFF505050)),
+      decoration: const InputDecoration(
         prefixIcon: Icon(Icons.mail, color: Color(0xFF505050)),
-        hintText: 'Username',
+        hintText: 'Email',
         hintStyle: TextStyle(color: Color(0xFF505050)),
-      )
+      ),
+      onChanged: (value) {
+        setEmail(value);
+      },
     );
   }
-}
 
-class SignupButton extends StatelessWidget {
-  const SignupButton({super.key});
+  Widget usernameField() {
+    return TextField(
+      //obscureText: false,
+      style: const TextStyle(color: Color(0xFF505050)),
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.person, color: Color(0xFF505050)),
+        hintText: 'Username',
+        hintStyle: TextStyle(color: Color(0xFF505050)),
+      ),
+      onChanged: (value) => setUsername(value),
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget passwordField() {
+    return TextField(
+      obscureText: true,
+      style: const TextStyle(color: Color(0xFF505050)),
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.person, color: Color(0xFF505050)),
+        hintText: 'password',
+        hintStyle: TextStyle(color: Color(0xFF505050)),
+      ),
+      onChanged: (value) => setPassword(value),
+    );
+  }
+
+  Widget signupButton() {
     final btn = ElevatedButton(
-      onPressed: () {Get.off(() => const HomePage());},
+      onPressed: () {_submitForm();},
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2F7694),
         foregroundColor: Colors.white,
@@ -65,13 +140,8 @@ class SignupButton extends StatelessWidget {
     );
     return btn;
   }
-}
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget loginButton() {
     final btn = ElevatedButton(
       onPressed: () {Get.off(() => const LoginPage());},
       style: ElevatedButton.styleFrom(
@@ -91,39 +161,5 @@ class LoginButton extends StatelessWidget {
       ),
     );
     return btn;
-  }
-}
-
-class UsernameField extends StatelessWidget {
-  const UsernameField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TextField(
-      //obscureText: false,
-      style: TextStyle(color: Color(0xFF505050)),
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.person, color: Color(0xFF505050)),
-        hintText: 'Username',
-        hintStyle: TextStyle(color: Color(0xFF505050)),
-      )
-    );
-  }
-}
-
-class PasswordField extends StatelessWidget {
-  const PasswordField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TextField(
-      obscureText: true,
-      style: TextStyle(color: Color(0xFF505050)),
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.person, color: Color(0xFF505050)),
-        hintText: 'password',
-        hintStyle: TextStyle(color: Color(0xFF505050)),
-      )
-    );
   }
 }
