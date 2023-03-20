@@ -78,9 +78,12 @@ class _LoginForm extends State<LoginForm> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        const Text('Login info', style: TextStyle(color: Color(0xFF858484), fontSize: 10),),
-        usernameField(),
-        passwordField(),
+        const Text(
+          'Login info',
+          style: TextStyle(color: Color(0xFF858484), fontSize: 12),
+        ),
+        const UsernameField(),
+        const PasswordField(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -91,7 +94,7 @@ class _LoginForm extends State<LoginForm> {
         ),
         const CheckBox(),
         loginButton(),
-        const Center(child: Text('----------or-----------')),
+        const Center(child: Text('-------------------------or-------------------------')),
         registerButton()
       ],
     );
@@ -108,37 +111,31 @@ class _LoginForm extends State<LoginForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12),
       ),
       child: const Text('Log in',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        )
-      ),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
     );
     return loginBtn;
   }
 
   Widget registerButton() {
     final btn = ElevatedButton(
-      onPressed: () {Get.off(() => const SignupPage());},
+      onPressed: () {
+        Get.off(() => const SignupPage());
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12),
       ),
       child: const Text('Sign up',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        )
-      ),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
     );
     return btn;
   }
@@ -147,13 +144,11 @@ class _LoginForm extends State<LoginForm> {
     final btn = TextButton(
       onPressed: () {},
       child: const Text('Forgot password?',
-        style: TextStyle(
-          color: Color(0xFF858484),
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          decoration: TextDecoration.underline
-        )
-      ),
+          style: TextStyle(
+              color: Color(0xFF858484),
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline)),
     );
     return btn;
   }
@@ -195,22 +190,21 @@ class CheckBox extends StatefulWidget {
 
 class _CheckBoxState extends State<CheckBox> {
   bool _selected = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      value: _selected,
-      onChanged: (value) {
-        setState( () {
-          _selected = value!;
-        });
-      },
-      title: const Text('Keep me logged in', 
-        style: TextStyle(color: Color(0xFF505050), fontSize: 15)),
-      controlAffinity: ListTileControlAffinity.leading,
-      activeColor: Colors.transparent,
-      checkColor: const Color(0xFF505050),
-      side: const BorderSide(color: Color(0xFF505050))
-    );
+        value: _selected,
+        onChanged: (value) {
+          setState(() {
+            _selected = value!;
+          });
+        },
+        title: const Text('Keep me logged in',
+            style: TextStyle(color: Color(0xFF505050), fontSize: 14)),
+        controlAffinity: ListTileControlAffinity.leading,
+        activeColor: Colors.transparent,
+        checkColor: const Color(0xFF505050),
+        side: const BorderSide(color: Color(0xFF505050)));
   }
 }

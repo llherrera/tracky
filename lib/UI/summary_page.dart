@@ -24,8 +24,9 @@ class _SummaryPageState extends State<SummaryPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(child: SingleChildScrollView(child: 
-              Container(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -78,23 +79,22 @@ class _SummaryPageState extends State<SummaryPage> {
                     // FILA 4 - PARA EL MAPA
                     const SizedBox(height: 15.0),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(
-                        'assets/images/mapa.png',
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                      )
-                    ),
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          'assets/images/mapa.png',
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                        )),
                     // FILA 5 - PARA EL TEXTO DE KILOMETROS
                     const SizedBox(height: 30.0),
-                    const Padding(padding: EdgeInsets.only(left: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
                       child: Text(
                         'Km: 90km',
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                        ),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                     // FILA 6 - PARA EL TEXTO DE TIEMPO

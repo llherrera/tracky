@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/activity_widgets/start_button.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddActivity extends StatefulWidget {
   const AddActivity({super.key});
@@ -50,23 +51,55 @@ class _AddActivityState extends State<AddActivity> {
               ),
               SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
               Container(
+                height: 250,
                 padding: const EdgeInsets.all(30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/mapa_start.png',
-                    width: 200,
-                    height: 300,
-                    fit: BoxFit.cover,
+                  child: MapGoogle(
+                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(37.77483, -122.41942), // San Francisco
+                      zoom: 12,
+                    ),
+                    markers: {
+                      const Marker(
+                        markerId: MarkerId('marker1'),
+                        position: LatLng(37.77483, -122.41942), // San Francisco
+                        infoWindow: InfoWindow(title: 'Marker 1'),
+                      ),
+                    },
                   ),
                 ),
               ),
+
               const SizedBox(height: 5),
               //Button
               StartButton(isWalk: _isWalk,),
             ],
           ),
-        )
+        ));
+  }
+}
+
+class MapGoogle extends StatelessWidget {
+  final String apiKey;
+  final CameraPosition initialCameraPosition;
+  final Set<Marker> markers;
+
+  const MapGoogle({
+    super.key,
+    required this.apiKey,
+    required this.initialCameraPosition,
+    required this.markers,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: initialCameraPosition,
+      markers: markers,
+      onMapCreated: (GoogleMapController controller) {},
     );
   }
 }
