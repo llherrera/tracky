@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tracky/Data/activity.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/activity_widgets/start_button.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class AddActivity extends StatelessWidget {
+class AddActivity extends StatefulWidget {
   const AddActivity({super.key});
+
+  @override
+  State<AddActivity> createState() => _AddActivityState();
+}
+
+class _AddActivityState extends State<AddActivity> {
+  bool _isWalk = true;
+
+  void _setIsWalk(bool isWalk) {
+    setState(() {
+      _isWalk = isWalk;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +31,7 @@ class AddActivity extends StatelessWidget {
                 colors: [
               Color(0xFF4093CE),
               Color(0xFF9BCEF3),
-            ])),
+        ])),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
@@ -34,7 +49,7 @@ class AddActivity extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              const SelectActivity(),
+              SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
               Container(
                 height: 250,
                 padding: const EdgeInsets.all(30.0),
@@ -59,7 +74,7 @@ class AddActivity extends StatelessWidget {
 
               const SizedBox(height: 5),
               //Button
-              const StartButton(),
+              StartButton(isWalk: _isWalk,),
             ],
           ),
         ));

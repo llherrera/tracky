@@ -5,8 +5,21 @@ import '../Widgets/leadboard_widgets/search_field.dart';
 import '../Widgets/leadboard_widgets/table_segments.dart';
 import 'save_segment.dart';
 
-class Leaderboard extends StatelessWidget {
+class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
+
+  @override
+  State<Leaderboard> createState() => _LeaderboardState();
+}
+
+class _LeaderboardState extends State<Leaderboard> {
+  //const Leaderboard({super.key});
+  bool _isWalk = true;
+  void _setIsWalk(bool isWalk) {
+    setState(() {
+      _isWalk = isWalk;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +41,7 @@ class Leaderboard extends StatelessWidget {
               const Text('Leaderboard', style: TextStyle(color: Colors.white, fontSize: 50)),
               Container(
                 margin: const EdgeInsets.only(top: 20),
-                child: const SelectActivity(),
+                child: SelectActivity(isWalk: true, callback: _setIsWalk,),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 20),

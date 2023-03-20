@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Data/user.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 import '../Widgets/profile_widgets/edit_out_buttons.dart';
 import '../Widgets/profile_widgets/statistics_button.dart';
@@ -8,6 +10,9 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserProvider userP = Provider.of<UserProvider>(context);
+    final User? user = userP.user;
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -18,12 +23,12 @@ class Profile extends StatelessWidget {
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
-                  'Tania',
-                  style: TextStyle(color: Colors.white, fontSize: 30),
+                  '${user?.getUsername ?? 'User'}',
+                  style: const TextStyle(color: Colors.white, fontSize: 30),
                 ),
-                Text(
+                const Text(
                   'Barranquilla, Atlantico',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -71,7 +76,12 @@ class Profile extends StatelessWidget {
             ),
           ],
         ),
-        const LastActivityBtn(),
+        if (user?.activities.length == 0)...[
+          const Text('No activities yet', style: TextStyle(color: Colors.white, fontSize: 20),)
+        ]
+        else ...[
+          const LastActivityBtn(),
+        ] 
       ],
     );
   }
