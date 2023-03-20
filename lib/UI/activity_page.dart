@@ -21,6 +21,14 @@ class _AddActivityState extends State<AddActivity> {
     });
   }
 
+  late GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,9 +61,17 @@ class _AddActivityState extends State<AddActivity> {
               Container(
                 height: 250,
                 padding: const EdgeInsets.all(30.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: MapGoogle(
+                child: 
+                  /*GoogleMap(
+                    onMapCreated: _onMapCreated,
+                    mapType: MapType.normal,
+                    myLocationEnabled: true,
+                    initialCameraPosition: CameraPosition(
+                      target: _center,
+                      zoom: 11.0,
+                    ),
+                  )*/
+                   MapGoogle(
                     apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(37.77483, -122.41942), // San Francisco
@@ -69,8 +85,8 @@ class _AddActivityState extends State<AddActivity> {
                       ),
                     },
                   ),
-                ),
               ),
+              //),
 
               const SizedBox(height: 5),
               //Button

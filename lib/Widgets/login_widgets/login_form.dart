@@ -82,8 +82,8 @@ class _LoginForm extends State<LoginForm> {
           'Login info',
           style: TextStyle(color: Color(0xFF858484), fontSize: 12),
         ),
-        const UsernameField(),
-        const PasswordField(),
+        usernameField(),
+        passwordField(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
