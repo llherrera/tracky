@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:tracky/Data/user.dart';
 import 'package:tracky/UI/home_page.dart';
+import '../Data/activity.dart';
 import '../Widgets/summary_widgets/save_delete_buttons.dart';
 
 class SummaryPage extends StatefulWidget {
@@ -14,6 +17,10 @@ class SummaryPage extends StatefulWidget {
 class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
+    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+    final User? user = userP.user;
+    final Activity act = user?.getActivity ?? Activity();
+    final differenceTime = act.dateEnd.difference(act.dateStart);
     return Scaffold(
       body: Stack(
         children: [
@@ -26,7 +33,7 @@ class _SummaryPageState extends State<SummaryPage> {
                         colors: [
                       Color(0xFF4093CE),
                       Color(0xFF9BCEF3),
-                    ])),
+                ])),
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,11 +65,10 @@ class _SummaryPageState extends State<SummaryPage> {
                     ),
                     const SizedBox(height: 40.0),
                     //FILA 3 - PARA EL NOMBRE DEL EJERCICIO
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20.0, right: 20),
-                      child: Text(
-                        'Running',
-                        style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20),
+                      child: Text(act.type! ? 'Running' : 'Cycling',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
                           fontStyle: FontStyle.italic,
@@ -93,11 +99,10 @@ class _SummaryPageState extends State<SummaryPage> {
                     ),
                     // FILA 6 - PARA EL TEXTO DE TIEMPO
                     const SizedBox(height: 10),
-                    const Padding(padding: EdgeInsets.only(left: 20),
+                    Padding(padding: const EdgeInsets.only(left: 20),
                         child: 
-                          Text(
-                            'Time: 2:00:00',
-                            style: TextStyle(
+                          Text('Time: ' + differenceTime.toString().substring(0, 7),
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
                               color: Colors.white

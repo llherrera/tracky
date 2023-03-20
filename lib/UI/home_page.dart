@@ -78,7 +78,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userP = Provider.of<UserProvider>(context);
+    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
     final User? user = userP.user;
 
     return Column(
@@ -88,7 +88,7 @@ class Home extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Welcome ${user?.getUsername == null ? 'User' : user?.getUsername}!', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+            Text('Welcome ${user?.getUsername ?? 'User'}!', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
             const Icon(Icons.person, color: Colors.white, size: 30,)
           ],
         ),
@@ -112,8 +112,14 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        const LastActivityBtn(),
-        const LastActivityBtn(),
+        if (user?.activities.length == 0) ...[
+          const Text('No activities yet', style: TextStyle(color: Colors.white, fontSize: 20),)
+        ] else if (user?.activities.length == 1) ...[
+          const LastActivityBtn(),
+        ] else ...[
+          const LastActivityBtn(),
+          const UnLastActivityBtn(),
+        ]
       ]
     );
   }

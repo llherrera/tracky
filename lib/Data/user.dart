@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '/Data/activity.dart';
 
 class User extends ChangeNotifier {
   String username;
   String email;
   String password;
+  List<Activity> activities = [];
 
   User(this.username, this.email, this.password);
+  
+  List<User> users = [];
   
   get getUsername => username;
 
@@ -19,8 +22,6 @@ class User extends ChangeNotifier {
   get getPassword => password;
 
   set setPassword( password) => this.password = password;
-  
-  List<User> users = [];
 
   void addUser(User user) {
     users.add(user);
@@ -35,6 +36,23 @@ class User extends ChangeNotifier {
     }
     return null;
   }
+
+  void addActivity(Activity activity) {
+    activities.add(activity);
+    notifyListeners();
+  }
+
+  void updateActivity(Activity activity) {
+    if (activities.contains(activity)) {
+      activities[activities.indexOf(activity)] = activity;
+      notifyListeners();
+    }else{
+      addActivity(activity);
+    }
+    //activities[activity.id] = activity;
+  }
+
+  get getActivity => activities[activities.length - 1];
 }
 
 class UserProvider with ChangeNotifier {
