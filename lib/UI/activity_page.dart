@@ -31,7 +31,7 @@ class _AddActivityState extends State<AddActivity> {
                 colors: [
               Color(0xFF4093CE),
               Color(0xFF9BCEF3),
-        ])),
+            ])),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(
@@ -56,7 +56,7 @@ class _AddActivityState extends State<AddActivity> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: MapGoogle(
-                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
+                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZO8',
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(37.77483, -122.41942), // San Francisco
                       zoom: 12,
@@ -74,7 +74,9 @@ class _AddActivityState extends State<AddActivity> {
 
               const SizedBox(height: 5),
               //Button
-              StartButton(isWalk: _isWalk,),
+              StartButton(
+                isWalk: _isWalk,
+              ),
             ],
           ),
         ));

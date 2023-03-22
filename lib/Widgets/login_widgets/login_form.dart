@@ -13,24 +13,25 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginForm extends State<LoginForm> {
-
   String _username = '';
   String _password = '';
 
   get username => _username;
   get password => _password;
-  
+
   void setUsername(String username) {
     _username = username;
   }
-  void setPassword(String password){
+
+  void setPassword(String password) {
     _password = password;
   }
 
   Future<void> _submitForm() async {
     final user = Provider.of<User>(context, listen: false);
     if (_username.isNotEmpty || _password.isNotEmpty) {
-      UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
+      UserProvider userProvider =
+          Provider.of<UserProvider>(context, listen: false);
       final User? userLog = user.checkUser(_username, _password);
       if (userLog != null) {
         userProvider.login(userLog);
@@ -38,37 +39,37 @@ class _LoginForm extends State<LoginForm> {
         return;
       } else {
         return showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) =>
-          AlertDialog(
-            title: const Text('Error'),
-            content: const Text('Username or password is incorrect'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {Get.back();},
-                child: const Text('OK'),
-              )
-            ],
-          )
-        );
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Username or password is incorrect'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
       }
     } else {
       return showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) =>
-        AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Please fill in all the fields'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {Get.back();},
-              child: const Text('OK'),
-            )
-          ],
-        )
-      );
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('Please fill in all the fields'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text('OK'),
+                  )
+                ],
+              ));
     }
   }
 
@@ -82,8 +83,8 @@ class _LoginForm extends State<LoginForm> {
           'Login info',
           style: TextStyle(color: Color(0xFF858484), fontSize: 12),
         ),
-        const UsernameField(),
-        const PasswordField(),
+        usernameField(),
+        passwordField(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -94,7 +95,9 @@ class _LoginForm extends State<LoginForm> {
         ),
         const CheckBox(),
         loginButton(),
-        const Center(child: Text('-------------------------or-------------------------')),
+        const Center(
+            child:
+                Text('-------------------------or-------------------------')),
         registerButton()
       ],
     );
@@ -104,7 +107,7 @@ class _LoginForm extends State<LoginForm> {
     final loginBtn = ElevatedButton(
       onPressed: () {
         _submitForm();
-        },
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF2F7694),
         foregroundColor: Colors.white,
@@ -178,7 +181,6 @@ class _LoginForm extends State<LoginForm> {
       onChanged: (value) => setPassword(value),
     );
   }
-
 }
 
 class CheckBox extends StatefulWidget {
