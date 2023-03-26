@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
 import 'package:tracky/Data/user.dart';
+import 'package:tracky/UI/activity_detail.dart';
 
 class LastActivityBtn extends StatelessWidget {
   const LastActivityBtn({super.key});
@@ -20,7 +22,9 @@ class LastActivityBtn extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+         Get.to(() => const Activitydetail());
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(

@@ -72,7 +72,7 @@ class _AddActivityState extends State<AddActivity> {
                     ),
                   )*/
                    MapGoogle(
-                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
+                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZO8',
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(37.77483, -122.41942), // San Francisco
                       zoom: 12,
