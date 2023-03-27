@@ -30,7 +30,7 @@ void main() {
         findsOneWidget); //Buscar el HintText dentro del TextField
     expect(find.text('Keep me logged in'), findsOneWidget);
 
-    var login = find.text('Log in'); //Guarda el widget de Log In
+    var login = find.text('Log in'); //Guarda el widget del Log In
     await tester.tap(login); //Presiona el Widget de Log In
     await tester.pump(); //Espera unos Frames
 
