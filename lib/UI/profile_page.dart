@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tracky/UI/historial_page.dart';
 import '../Data/user.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 import '../Widgets/profile_widgets/edit_out_buttons.dart';
@@ -65,7 +67,9 @@ class Profile extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                 Get.to(() => const HistorialPage());
+              },
               child: const Text(
                 'View all',
                 style: TextStyle(

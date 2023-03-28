@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Data/user.dart';
+import 'package:get/get.dart';
 import 'profile_page.dart';
 import 'leadboard_page.dart';
+import 'historial_page.dart';
 import '../Widgets/home_widgets/addActivity_button.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 
@@ -14,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
@@ -32,21 +33,19 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
             Color(0xFF4093CE),
             Color(0xFF9BCEF3),
-          ]
-        )
-      ),
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
-          margin: const EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 10),
-          child: _widgetOptions.elementAt(_selectedIndex)
-        ), 
+            margin:
+                const EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 10),
+            child: _widgetOptions.elementAt(_selectedIndex)),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
           iconSize: 20,
@@ -78,49 +77,70 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+    final UserProvider userP =
+        Provider.of<UserProvider>(context, listen: false);
     final User? user = userP.user;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Welcome ${user?.getUsername ?? 'User'}!', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-            const Icon(Icons.person, color: Colors.white, size: 30,)
-          ],
-        ),
-        const Text("Let's exercise your day!", style: TextStyle(color: Colors.white, fontSize: 30), textAlign: TextAlign.right,),
-        const AddActivityButton(),
-        const SizedBox(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Last Activity', style: TextStyle(color: Colors.white, fontSize: 20),),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'View all',
-                style: TextStyle(
-                  color: Colors.white,
-                  decoration: TextDecoration.underline,
-                  fontSize: 15
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'Welcome ${user?.getUsername ?? 'User'}!',
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              const Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 40,
+              )
+            ],
+          ),
+          const Text(
+            "Let's exercise your day!",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.right,
+          ),
+          const AddActivityButton(),
+          const SizedBox(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Last Activity',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.to(() => const HistorialPage());
+                },
+                child: const Text(
+                  'View all',
+                  style: TextStyle(
+                      color: Colors.white,
+                      decoration: TextDecoration.underline,
+                      fontSize: 15),
                 ),
               ),
-            ),
-          ],
-        ),
-        if (user?.activities.length == 0) ...[
-          const Text('No activities yet', style: TextStyle(color: Colors.white, fontSize: 20),)
-        ] else if (user?.activities.length == 1) ...[
-          const LastActivityBtn(),
-        ] else ...[
-          const LastActivityBtn(),
-          const UnLastActivityBtn(),
-        ]
-      ]
-    );
+            ],
+          ),
+          if (user?.activities.length == 0) ...[
+            const Text(
+              'No activities yet',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )
+          ] else if (user?.activities.length == 1) ...[
+            const LastActivityBtn(),
+          ] else ...[
+            const LastActivityBtn(),
+            const UnLastActivityBtn(),
+          ]
+        ]);
   }
 }
