@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/user.dart';
 import 'package:tracky/UI/home_page.dart';
@@ -15,12 +16,42 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
+  GoogleMapController? _controller;
+  final Set<Marker> _markers = {};
+  final Set<Polyline> _polyline = {};
+
   @override
   Widget build(BuildContext context) {
     final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
     final User? user = userP.user;
     final Activity act = user?.getActivity ?? Activity();
     final differenceTime = act.dateEnd.difference(act.dateStart);
+    final _route = act.routeList;
+
+    for(int i=0; i<_route.length; i++){
+      _markers.add(
+        // added markers
+        Marker(
+            markerId: MarkerId(i.toString()),
+          position: LatLng(_route[i].latitude, _route[i].longitude),
+          /*infoWindow: InfoWindow(
+            title: 'HOTEL',
+            snippet: '5 Star Hotel',
+          ),*/
+          icon: BitmapDescriptor.defaultMarker,
+        )
+      );
+      setState(() {
+ 
+      });
+      _polyline.add(
+          Polyline(
+            polylineId: PolylineId('1'),
+            points: _route.map((e) => LatLng(e.latitude, e.longitude)).toList(),
+            color: Colors.green,
+          )
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -78,13 +109,25 @@ class _SummaryPageState extends State<SummaryPage> {
                     ),
                     // FILA 4 - PARA EL MAPA
                     const SizedBox(height: 15.0),
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.asset(
-                          'assets/images/mapa.png',
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width * 0.9,
-                        )),
+                    Container(
+                      height: 250,
+                      padding: const EdgeInsets.all(30.0),
+                      child: GoogleMap(
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller =controller;
+                        },
+                        initialCameraPosition: const CameraPosition(
+                          target: LatLng(10.96854, -74.78132),
+                          zoom: 14,
+                        ),
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                        zoomControlsEnabled: false,
+                        mapType: MapType.normal,
+                        compassEnabled: true,
+                        markers: _markers,
+                      ),
+                    ),
                     // FILA 5 - PARA EL TEXTO DE KILOMETROS
                     const SizedBox(height: 30.0),
                     Padding(

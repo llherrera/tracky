@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/UI/activity_page.dart';
+import '../Data/activity.dart';
 import '../Data/user.dart';
 import 'package:get/get.dart';
 
@@ -12,11 +15,44 @@ class Activitydetail extends StatefulWidget {
 }
 
 class _ActivitydetailState extends State<Activitydetail> {
+
+  GoogleMapController? _controller;
+  final Set<Marker> _markers = {};
+  final Set<Polyline> _polyline = {};
+
   @override
   Widget build(BuildContext context) {
     final UserProvider userP =
         Provider.of<UserProvider>(context, listen: false);
     final User? user = userP.user;
+    final Activity act = user?.getActivity ?? Activity();
+    final differenceTime = act.dateEnd.difference(act.dateStart);
+    final _route = act.routeList;
+
+    for(int i=0; i<_route.length; i++){
+      _markers.add(
+        // added markers
+        Marker(
+            markerId: MarkerId(i.toString()),
+          position: LatLng(_route[i].latitude, _route[i].longitude),
+          /*infoWindow: InfoWindow(
+            title: 'HOTEL',
+            snippet: '5 Star Hotel',
+          ),*/
+          icon: BitmapDescriptor.defaultMarker,
+        )
+      );
+      setState(() {
+ 
+      });
+      _polyline.add(
+          Polyline(
+            polylineId: PolylineId('1'),
+            points: _route.map((e) => LatLng(e.latitude, e.longitude)).toList(),
+            color: Colors.green,
+          )
+      );
+    }
 
     return Container(
         decoration: const BoxDecoration(
@@ -69,25 +105,25 @@ class _ActivitydetailState extends State<Activitydetail> {
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),
-                /*MapGoogle(apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZO8',
-                    initialCameraPosition: const CameraPosition(
-                      target: LatLng(37.77483, -122.41942), // San Francisco
-                      zoom: 12), markers: {
-                      const Marker(
-                        markerId: MarkerId('marker1'),
-                        position: LatLng(37.77483, -122.41942), // San Francisco
-                        infoWindow: InfoWindow(title: 'Marker 1'),
-                      ),
-                    },),*/
                 const SizedBox(height: 15.0),
-                Center(
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(
-                        'assets/images/mapa.png',
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                      )),
+                Container(
+                  height: 250,
+                  padding: const EdgeInsets.all(30.0),
+                  child: GoogleMap(
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller =controller;
+                    },
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(10.96854, -74.78132),
+                      zoom: 14,
+                    ),
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+                    zoomControlsEnabled: false,
+                    mapType: MapType.normal,
+                    compassEnabled: true,
+                    markers: _markers,
+                  ),
                 ),
                 Center(
                   child: Container(
@@ -102,39 +138,39 @@ class _ActivitydetailState extends State<Activitydetail> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Type of activity:',
+                      children: [
+                        const Text('Type of activity:',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
-                        Text('Running',
+                        Text(act.type! ? 'Running' : 'Cycling',
                             style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
-                        Text('Date:',
+                                const TextStyle(color: Colors.black, fontSize: 20)),
+                        const Text('Date:',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
-                        Text('March 21, 2023 ',
+                        Text(act.dateStart.toString().substring(0 ,10),
                             style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
-                        Text('Duration: ',
+                                const TextStyle(color: Colors.black, fontSize: 20)),
+                        const Text('Duration: ',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
-                        Text('50min ',
+                        Text(differenceTime.toString().substring(0, 7),
                             style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
-                        Text('Distance: ',
+                                const TextStyle(color: Colors.black, fontSize: 20)),
+                        const Text('Distance: ',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
-                        Text('5kms ',
+                        Text(act.getDistance().toString() +' km',
                             style:
-                                TextStyle(color: Colors.black, fontSize: 20)),
+                                const TextStyle(color: Colors.black, fontSize: 20)),
                       ],
                     ),
                   ),

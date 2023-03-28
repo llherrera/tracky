@@ -90,7 +90,7 @@ class UnLastActivityBtn extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {Get.to(() => const Activitydetail());},
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
