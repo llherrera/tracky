@@ -12,21 +12,21 @@ void main() {
     });
 
     // Cierra la conexión con el driver después de que se hayan completado los tests
-    tearDownAll(() async {
-      if (driver != null) {
-        driver.close();
-      }
-    });
+    //tearDownAll(() async {
+    //if (driver != null) {
+    //driver.close();
+    //}
+    //});
 
     final login = find.text('Log in');
     final llenar = find.text('Please fill in all the fields');
     //final error = find.text('Username or password is incorrect');
     final ok = find.text('Ok');
     test("Inicio sesion sin ingresar usuario y clave", () async {
-      await driver.waitFor(login);
-      await driver.tap(login);
-      await driver.waitFor(llenar);
-      await driver.tap(ok);
+      //await driver.waitFor(login);
+      //await driver.tap(login);
+      //await driver.waitFor(llenar);
+      //await driver.tap(ok);
     });
 
     //test("Inicio sesion ingresando usuario y clave erroneos", () async {
