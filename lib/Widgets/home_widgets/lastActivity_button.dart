@@ -37,8 +37,8 @@ class LastActivityBtn extends StatelessWidget {
                 ],
               )
             ),
-            const Padding(padding: EdgeInsets.only(top: 5, bottom: 5),
-              child: Text('Route 20: 40 km', style: TextStyle(color: Colors.white),)
+            Padding(padding: const EdgeInsets.only(top: 5, bottom: 5),
+              child: Text('Route ${act.getId}: ${act.getDistance()} km', style: const TextStyle(color: Colors.white),)
             ),
             Padding(padding: const EdgeInsets.only(top: 5, bottom: 10),
               child: Text(act.type! ? 'Running' : 'Cycling',
@@ -103,8 +103,8 @@ class UnLastActivityBtn extends StatelessWidget {
                 ],
               )
             ),
-            const Padding(padding: EdgeInsets.only(top: 5, bottom: 5),
-              child: Text('Route 20: 40 km', style: TextStyle(color: Colors.white),)
+            Padding(padding: const EdgeInsets.only(top: 5, bottom: 5),
+              child: Text('Route ${act.getId}: ${act.getDistance()} km', style: const TextStyle(color: Colors.white),)
             ),
             Padding(padding: const EdgeInsets.only(top: 5, bottom: 10),
               child: Text(act.type! ? 'Running' : 'Cycling',

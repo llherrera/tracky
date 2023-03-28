@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/activity_widgets/start_button.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AddActivity extends StatefulWidget {
   const AddActivity({super.key});
@@ -14,6 +17,39 @@ class AddActivity extends StatefulWidget {
 
 class _AddActivityState extends State<AddActivity> {
   bool _isWalk = true;
+  Position _currentPosition = Position(longitude: -74.78132, latitude: 10.96854, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
+  late GoogleMapController _mapController;
+
+  void _getCurrentLocation() async {
+    final position = await _determinatePosition();
+    setState(() {
+      _currentPosition = position;
+    });
+  }
+
+  Future<Position> _determinatePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    return await Geolocator.getCurrentPosition();
+  }
 
   void _setIsWalk(bool isWalk) {
     setState(() {
@@ -21,13 +57,6 @@ class _AddActivityState extends State<AddActivity> {
     });
   }
 
-  late GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,61 +90,27 @@ class _AddActivityState extends State<AddActivity> {
               Container(
                 height: 250,
                 padding: const EdgeInsets.all(30.0),
-                child: 
-                  /*GoogleMap(
-                    onMapCreated: _onMapCreated,
-                    mapType: MapType.normal,
-                    myLocationEnabled: true,
-                    initialCameraPosition: CameraPosition(
-                      target: _center,
-                      zoom: 11.0,
-                    ),
-                  )*/
-                   MapGoogle(
-                    apiKey: 'AIzaSyDytj5l8LUaEZxcvCdV9LK3WDhIB3GiZ08',
-                    initialCameraPosition: const CameraPosition(
-                      target: LatLng(37.77483, -122.41942), // San Francisco
-                      zoom: 12,
-                    ),
-                    markers: {
-                      const Marker(
-                        markerId: MarkerId('marker1'),
-                        position: LatLng(37.77483, -122.41942), // San Francisco
-                        infoWindow: InfoWindow(title: 'Marker 1'),
-                      ),
-                    },
+                child: GoogleMap(
+                  onMapCreated: (GoogleMapController controller) {
+                    _mapController = controller;
+                    _getCurrentLocation();
+                  },
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+                    zoom: 14,
                   ),
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
+                  zoomControlsEnabled: false,
+                  mapType: MapType.normal,
+                  compassEnabled: true,
+                ),
               ),
-              //),
-
               const SizedBox(height: 5),
               //Button
               StartButton(isWalk: _isWalk,),
             ],
           ),
         ));
-  }
-}
-
-class MapGoogle extends StatelessWidget {
-  final String apiKey;
-  final CameraPosition initialCameraPosition;
-  final Set<Marker> markers;
-
-  const MapGoogle({
-    super.key,
-    required this.apiKey,
-    required this.initialCameraPosition,
-    required this.markers,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GoogleMap(
-      mapType: MapType.normal,
-      initialCameraPosition: initialCameraPosition,
-      markers: markers,
-      onMapCreated: (GoogleMapController controller) {},
-    );
   }
 }

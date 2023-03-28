@@ -87,11 +87,11 @@ class _SummaryPageState extends State<SummaryPage> {
                         )),
                     // FILA 5 - PARA EL TEXTO DE KILOMETROS
                     const SizedBox(height: 30.0),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        'Km: 90km',
-                        style: TextStyle(
+                        'Km: ${act.getDistance()} km',
+                        style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),

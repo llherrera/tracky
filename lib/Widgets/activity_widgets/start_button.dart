@@ -1,9 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
 import '../../Data/user.dart';
 import '../../UI/summary_page.dart';
+
+const LocationSettings locationSettings = LocationSettings(
+  accuracy: LocationAccuracy.high,
+  distanceFilter: 100,
+);
 
 class StartButton extends StatefulWidget {
   StartButton({super.key, required this.isWalk});
@@ -15,6 +23,14 @@ class StartButton extends StatefulWidget {
 
 class _StartButtonState extends State<StartButton> {
   bool _isPressed = false;
+  List<Position> _routeList = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  StreamSubscription<Position>? positionStream;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +42,22 @@ class _StartButtonState extends State<StartButton> {
               final User? user = userP.user;
               Activity act = Activity();
               act.setType(widget.isWalk);
-              user?.addActivity(act);
+              positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+                (Position? position) {
+                  if (position != null){
+                    _routeList.add(position);
+                  }
+              });
               act.dateStart = DateTime.now();
+              user?.addActivity(act);
             } else {
               final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
               final User? user = userP.user;
               Activity act = user?.getActivity;
               act.dateEnd = DateTime.now();
+              act.routeList = _routeList;
               user?.updateActivity(act);
+              positionStream!.cancel();
               Get.to(() => const SummaryPage());
             }
             setState(() {
