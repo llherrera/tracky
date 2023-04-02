@@ -17,7 +17,8 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-      child: Scaffold(
+      child: SafeArea(child: 
+      Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: Column(
@@ -27,8 +28,7 @@ class LoginPage extends StatelessWidget {
             ClipPath(
               clipper: HalfCircleClipper(),
               child: Container(
-                height: MediaQuery.of(context).size.width *
-                    0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
+                height: MediaQuery.of(context).size.width *0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/testee.png'),
@@ -38,8 +38,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(30, 0, 10,
-                  10), // Aqui se definen los margenes para la palabra tracky
+              margin: const EdgeInsets.fromLTRB(30, 0, 10, 10), // Aqui se definen los margenes para la palabra tracky
               child: const Text(
                 'Tracky',
                 style: TextStyle(
@@ -63,7 +62,7 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 

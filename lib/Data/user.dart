@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '/Data/activity.dart';
 
 class User extends ChangeNotifier {
+  static int intGen = 0;
+  int id = intGen++;
   String username;
   String email;
   String password;
@@ -49,7 +51,6 @@ class User extends ChangeNotifier {
     }else{
       addActivity(activity);
     }
-    //activities[activity.id] = activity;
   }
 
   get getActivity => activities[activities.length - 1];
@@ -57,8 +58,6 @@ class User extends ChangeNotifier {
 
 class UserProvider with ChangeNotifier {
   User? _user;
-
-  //UserProvider(this._user);
 
   User? get user => _user;
 

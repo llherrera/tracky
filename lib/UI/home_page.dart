@@ -136,11 +136,17 @@ class Home extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 20),
             )
           ] else if (user?.activities.length == 1) ...[
-            const LastActivityBtn(),
+            LastActivityBtn(
+              act: user?.getActivity,
+            ),
           ] else ...[
-            const LastActivityBtn(),
-            const UnLastActivityBtn(),
-          ]
+            LastActivityBtn(
+              act: user?.getActivity,
+            ),
+            LastActivityBtn(
+              act: user?.activities[user.activities.length - 2],
+            )
+          ],
         ]);
   }
 }

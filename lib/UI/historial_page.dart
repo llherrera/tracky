@@ -28,71 +28,74 @@ class _HistorialPageState extends State<HistorialPage> {
     final User? user = userP.user;
 
     return Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xFF4093CE),
-              Color(0xFF9BCEF3),
-            ])),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Get.back();
-                        },
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topCenter,
-                      margin: const EdgeInsets.only(top: 20, bottom: 20),
-                      child: const Text(
-                        'Last activity',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-                SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
-                if (user?.activities.length == 0) ...[
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      'No activities yet',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  )
-                ] else if (user?.activities.length == 1) ...[
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: LastActivityBtn(),
-                  )
-                ] else ...[
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: LastActivityBtn(),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF4093CE),
+            Color(0xFF9BCEF3),
+          ]
+        )
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {Get.back();},
+                    color: Colors.white,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: UnLastActivityBtn(),
-                  )
-                ]
-              ]),
-        ));
+                ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: const Text(
+                    'Last activity',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
+            if (user?.activities.length == 0) ...[
+              const Text(
+                'No activities yet',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              )
+            ] else ...[
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                reverse: true,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: user?.activities.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      top: 10, left: 20, right: 20
+                    ),
+                    child: LastActivityBtn(act: user?.activities[index])
+                  );
+                }
+              )
+            ]
+          ]
+        ))
+      ),      
+    );
   }
 }

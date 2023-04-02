@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'Data/activity.dart';
 import 'Data/user.dart';
+import 'Modelos/activity_model.dart';
+import 'Modelos/user_model.dart';
 import 'UI/login_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Hive.registerAdapter(ActivityMAdapter());
+  Hive.registerAdapter(UserMAdapter());
+  await Hive.initFlutter();
+  //await Hive.openBox<MyModel>('myBox');
   runApp(
     MultiProvider(
       providers: [

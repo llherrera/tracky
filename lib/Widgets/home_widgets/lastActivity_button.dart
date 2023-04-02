@@ -5,14 +5,20 @@ import 'package:tracky/Data/activity.dart';
 import 'package:tracky/Data/user.dart';
 import 'package:tracky/UI/activity_detail.dart';
 
-class LastActivityBtn extends StatelessWidget {
-  const LastActivityBtn({super.key});
+class LastActivityBtn extends StatefulWidget {
+  LastActivityBtn({super.key, required this.act});
+  Activity? act;
 
   @override
+  State<LastActivityBtn> createState() => _LastActivityBtnState();
+}
+
+class _LastActivityBtnState extends State<LastActivityBtn> {
+  @override
   Widget build(BuildContext context) {
-    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
-    Activity act = user?.activities.last ?? Activity();
+    //final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+    //final User? user = userP.user;
+    Activity act = widget.act!;
     final date = act.dateStart;
 
 

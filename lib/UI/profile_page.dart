@@ -80,12 +80,16 @@ class Profile extends StatelessWidget {
             ),
           ],
         ),
-        if (user?.activities.length == 0)...[
-          const Text('No activities yet', style: TextStyle(color: Colors.white, fontSize: 20),)
+        if (user?.activities.length == 0) ...[
+          const Text(
+            'No activities yet',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          )
+        ] else ...[
+          LastActivityBtn(
+            act: user?.activities.last,
+          )
         ]
-        else ...[
-          const LastActivityBtn(),
-        ] 
       ],
     );
   }
