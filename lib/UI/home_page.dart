@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Data/user.dart';
 import 'package:get/get.dart';
+import '../Modelos/user_model.dart';
 import 'profile_page.dart';
 import 'leadboard_page.dart';
 import 'historial_page.dart';
@@ -79,7 +80,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserProvider userP =
         Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
+    final UserM? user = userP.user;
 
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -89,7 +90,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Welcome ${user?.getUsername ?? 'User'}!',
+                'Welcome ${user?.name ?? 'User'}!',
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 30,
@@ -137,11 +138,11 @@ class Home extends StatelessWidget {
             )
           ] else if (user?.activities.length == 1) ...[
             LastActivityBtn(
-              act: user?.getActivity,
+              act: user?.activities[user.activities.length - 1],
             ),
           ] else ...[
             LastActivityBtn(
-              act: user?.getActivity,
+              act: user?.activities[user.activities.length - 1],
             ),
             LastActivityBtn(
               act: user?.activities[user.activities.length - 2],

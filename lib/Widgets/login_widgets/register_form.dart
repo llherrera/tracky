@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import '../../Data/user.dart';
+import '../../Modelos/user_model.dart';
 import '../../UI/login_page.dart';
 import '../../UI/home_page.dart';
 
@@ -33,13 +35,14 @@ class _SignupForm extends State<SignupForm> {
   }
 
   Future<void> _submitForm() async {
-    final user = Provider.of<User>(context, listen: false);
-   // print(user.users);
+    //final user = Provider.of<User>(context, listen: false);
+    var boxUser = Hive.box('users');
     if (_username.isNotEmpty || _password.isNotEmpty || _email.isNotEmpty) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-      User _user = User(_username, _email, _password);
-      user.addUser(_user);
+      UserM _user = UserM(_username, _email, _password, []);
+      boxUser.add(_user);
       userProvider.login(_user);
+      print(boxUser.get(0).name + boxUser.get(0).password);
       Get.off(() => const HomePage());
       return;
     } else {

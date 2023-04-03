@@ -8,6 +8,8 @@ import '../Data/activity.dart';
 import '../Data/user.dart';
 import 'package:get/get.dart';
 
+import '../Modelos/user_model.dart';
+
 class Activitydetail extends StatefulWidget {
   const Activitydetail({super.key});
   @override
@@ -24,8 +26,8 @@ class _ActivitydetailState extends State<Activitydetail> {
   Widget build(BuildContext context) {
     final UserProvider userP =
         Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
-    final Activity act = user?.getActivity ?? Activity();
+    final UserM? user = userP.user;
+    final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
     final differenceTime = act.dateEnd.difference(act.dateStart);
     final _route = act.routeList;
 

@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
 import '../../Data/user.dart';
+import '../../Modelos/user_model.dart';
 import '../../UI/summary_page.dart';
 
 const LocationSettings locationSettings = LocationSettings(
@@ -36,28 +38,32 @@ class _StartButtonState extends State<StartButton> {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton.icon(
-          onPressed: () {
+          onPressed: () async {
+            var boxUser = Hive.box('users');
+            final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+            UserM? user = boxUser.getAt(userP.user?.key);
             if (!_isPressed){
-              final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-              final User? user = userP.user;
-              Activity act = Activity();
-              act.setType(widget.isWalk);
+              Activity act = Activity(DateTime.now(), widget.isWalk);
               positionStream = Geolocator.getPositionStream(locationSettings: locationSettings).listen(
                 (Position? position) {
                   if (position != null){
                     _routeList.add(position);
                   }
               });
-              act.dateStart = DateTime.now();
-              user?.addActivity(act);
+              user?.activities.add(act);
+              user?.save();
+              //await boxUser.put(user?.key, user);
+              //print('awwww');
             } else {
-              final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-              final User? user = userP.user;
-              Activity act = user?.getActivity;
-              act.dateEnd = DateTime.now();
+            //  final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+            //  final UserM? user = userP.user;
+              Activity? act = user?.activities[user.activities.length - 1];
+              act!.dateEnd = DateTime.now();
               act.routeList = _routeList;
-              user?.updateActivity(act);
+              user?.activities[user.activities.length - 1] = act;
               positionStream!.cancel();
+              user?.save();
+              //await boxUser.put(user?.key, user);
               Get.to(() => const SummaryPage());
             }
             setState(() {

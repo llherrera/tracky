@@ -20,7 +20,7 @@ class UserMAdapter extends TypeAdapter<UserM> {
       fields[0] as String,
       fields[1] as String,
       fields[2] as String,
-      (fields[3] as List).cast<ActivityM>(),
+      (fields[3] as List).cast<Activity>(),
     );
   }
 

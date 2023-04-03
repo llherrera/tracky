@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tracky/Data/user.dart';
 import 'package:tracky/UI/home_page.dart';
 import '../Data/activity.dart';
+import '../Modelos/user_model.dart';
 import '../Widgets/summary_widgets/save_delete_buttons.dart';
 
 class SummaryPage extends StatefulWidget {
@@ -23,8 +24,8 @@ class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
-    final Activity act = user?.getActivity ?? Activity();
+    final UserM? user = userP.user;
+    final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
     final differenceTime = act.dateEnd.difference(act.dateStart);
     final _route = act.routeList;
 

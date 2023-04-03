@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../Data/user.dart';
+import '../Modelos/user_model.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 
@@ -25,7 +26,7 @@ class _HistorialPageState extends State<HistorialPage> {
   Widget build(BuildContext context) {
     final UserProvider userP =
         Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
+    final UserM? user = userP.user;
 
     return Container(
       decoration: const BoxDecoration(

@@ -1,22 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
 
-class Activity extends ChangeNotifier{
+part 'activity.g.dart';
+
+@HiveType(typeId: 1)
+class Activity extends HiveObject{
   static int intGen = 0;
   int id = intGen++;
-  String? name;
+  @HiveField(0)
   var dateStart;
   var dateEnd;
   List<Position> routeList = [];
+  @HiveField(1)
   bool? type;
 
-  Activity();
-
-  get getName => name;
-
-  set setName( name) => this.name = name;
+  Activity(this.dateStart, this.type);
 
   get getType => type;
 
@@ -25,13 +23,6 @@ class Activity extends ChangeNotifier{
   get getId => id;
 
   set setId( id) => this.id = id;
-
-  List<Activity> activities = [];
-
-  void addActivity(Activity activity) {
-    activities.add(activity);
-    notifyListeners();
-  }
 
   double getDistance() {
     double distance = 0;
@@ -44,7 +35,4 @@ class Activity extends ChangeNotifier{
     }
     return distance;
   }
-
-  //void setType(bool isWalk) {}
-
 }

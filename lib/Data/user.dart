@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Modelos/user_model.dart';
 import '/Data/activity.dart';
 
 class User extends ChangeNotifier {
@@ -57,11 +58,11 @@ class User extends ChangeNotifier {
 }
 
 class UserProvider with ChangeNotifier {
-  User? _user;
+  UserM? _user;
 
-  User? get user => _user;
+  UserM? get user => _user;
 
-  void login(User user) {
+  void login(UserM user) {
     _user = user;
     notifyListeners();
   }

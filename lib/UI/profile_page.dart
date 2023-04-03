@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/UI/historial_page.dart';
 import '../Data/user.dart';
+import '../Modelos/user_model.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 import '../Widgets/profile_widgets/edit_out_buttons.dart';
 import '../Widgets/profile_widgets/statistics_button.dart';
@@ -13,7 +14,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider userP = Provider.of<UserProvider>(context);
-    final User? user = userP.user;
+    final UserM? user = userP.user;
     
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -27,7 +28,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '${user?.getUsername ?? 'User'}',
+                  '${user?.name ?? 'User'}',
                   style: const TextStyle(color: Colors.white, fontSize: 30),
                 ),
                 const Text(
