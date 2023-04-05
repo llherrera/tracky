@@ -35,4 +35,15 @@ class Activity extends HiveObject{
     }
     return distance;
   }
+
+  Duration getDuration() {
+    return dateEnd.difference(dateStart);
+  }
+
+  void addRoute() {
+    routeList.add(Position(longitude: -122.4194, latitude: 37.7749, timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1));
+    routeList.add(Position(longitude: -122.4194, latitude: 37.7749, timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1));
+    routeList.add(Position(longitude: -122.4194, latitude: 37.7749, timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1));
+    dateEnd = DateTime.now();
+  }
 }

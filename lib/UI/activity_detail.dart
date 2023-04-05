@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tracky/UI/activity_page.dart';
 import '../Data/activity.dart';
 import '../Data/user.dart';
 import 'package:get/get.dart';
@@ -28,7 +25,7 @@ class _ActivitydetailState extends State<Activitydetail> {
         Provider.of<UserProvider>(context, listen: false);
     final UserM? user = userP.user;
     final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
-    final differenceTime = act.dateEnd.difference(act.dateStart);
+    final differenceTime = act.getDuration();
     final _route = act.routeList;
 
     for(int i=0; i<_route.length; i++){
@@ -49,7 +46,7 @@ class _ActivitydetailState extends State<Activitydetail> {
       });
       _polyline.add(
           Polyline(
-            polylineId: PolylineId('1'),
+            polylineId: const PolylineId('1'),
             points: _route.map((e) => LatLng(e.latitude, e.longitude)).toList(),
             color: Colors.green,
           )
@@ -170,7 +167,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
-                        Text(act.getDistance().toString() +' km',
+                        Text('${act.getDistance()} km',
                             style:
                                 const TextStyle(color: Colors.black, fontSize: 20)),
                       ],

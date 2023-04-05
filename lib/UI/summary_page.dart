@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/Data/user.dart';
-import 'package:tracky/UI/home_page.dart';
 import '../Data/activity.dart';
 import '../Modelos/user_model.dart';
 import '../Widgets/summary_widgets/save_delete_buttons.dart';
@@ -26,7 +24,7 @@ class _SummaryPageState extends State<SummaryPage> {
     final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
     final UserM? user = userP.user;
     final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
-    final differenceTime = act.dateEnd.difference(act.dateStart);
+    final differenceTime = act.getDuration();
     final _route = act.routeList;
 
     for(int i=0; i<_route.length; i++){
@@ -47,7 +45,7 @@ class _SummaryPageState extends State<SummaryPage> {
       });
       _polyline.add(
           Polyline(
-            polylineId: PolylineId('1'),
+            polylineId: const PolylineId('1'),
             points: _route.map((e) => LatLng(e.latitude, e.longitude)).toList(),
             color: Colors.green,
           )
@@ -145,7 +143,7 @@ class _SummaryPageState extends State<SummaryPage> {
                     const SizedBox(height: 10),
                     Padding(padding: const EdgeInsets.only(left: 20),
                         child: 
-                          Text('Time: ' + differenceTime.toString().substring(0, 7),
+                          Text('Time: ${differenceTime.toString().substring(0, 7)}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.normal,
