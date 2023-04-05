@@ -28,7 +28,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '${user?.name ?? 'User'}',
+                  user?.name ?? 'User',
                   style: const TextStyle(color: Colors.white, fontSize: 30),
                 ),
                 const Text(
@@ -81,14 +81,14 @@ class Profile extends StatelessWidget {
             ),
           ],
         ),
-        if (user?.activities.length == 0) ...[
+        if (user!.activities.isEmpty) ...[
           const Text(
             'No activities yet',
             style: TextStyle(color: Colors.white, fontSize: 20),
           )
         ] else ...[
           LastActivityBtn(
-            act: user?.activities.last,
+            act: user.activities.last,
           )
         ]
       ],

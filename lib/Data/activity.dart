@@ -8,7 +8,9 @@ class Activity extends HiveObject{
   static int intGen = 0;
   int id = intGen++;
   @HiveField(0)
+  // ignore: prefer_typing_uninitialized_variables
   var dateStart;
+  // ignore: prefer_typing_uninitialized_variables
   var dateEnd;
   List<Position> routeList = [];
   @HiveField(1)

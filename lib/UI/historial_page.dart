@@ -72,24 +72,24 @@ class _HistorialPageState extends State<HistorialPage> {
               ],
             ),
             SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
-            if (user?.activities.length == 0) ...[
+            if (user!.activities.isEmpty) ...[
               const Text(
                 'No activities yet',
                 style: TextStyle(color: Colors.white, fontSize: 20),
               )
             ] else ...[
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 reverse: true,
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: user?.activities.length,
+                itemCount: user.activities.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.only(
                       top: 10, left: 20, right: 20
                     ),
-                    child: LastActivityBtn(act: user?.activities[index])
+                    child: LastActivityBtn(act: user.activities[index])
                   );
                 }
               )

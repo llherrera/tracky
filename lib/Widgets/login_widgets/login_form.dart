@@ -30,18 +30,16 @@ class _LoginForm extends State<LoginForm> {
   }
 
   Future<void> _submitForm() async {
-    //final user = Provider.of<User>(context, listen: false);
-    var boxUser = await Hive.box('users');
+    var boxUser = Hive.box('users');
     if (_username.isNotEmpty || _password.isNotEmpty) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
       UserM? userLog = await boxUser.values.where((element) => element.name == _username && element.password == _password).first;
-      print(userLog);
-      //final User? userLog = user.checkUser(_username, _password);
       if (userLog != null) {
         userProvider.login(userLog);
         Get.off(() => const HomePage());
         return;
       } else {
+        // ignore: use_build_context_synchronously
         return showDialog<void>(
           context: context,
           barrierDismissible: false,

@@ -20,7 +20,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => User('Dios','Dios@email.com','1111')),
         ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }

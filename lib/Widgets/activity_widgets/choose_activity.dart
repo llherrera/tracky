@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../Data/activity.dart';
-import '../../Data/user.dart';
-
+// ignore: must_be_immutable
 class SelectActivity extends StatefulWidget {
   SelectActivity({super.key, required this.isWalk, required this.callback});
   
   bool isWalk;
   Function(bool) callback;
-
-//  SelectActivity({Key key}) : super(key: key);
 
   @override
   State<SelectActivity> createState() => _SelectActivityState();

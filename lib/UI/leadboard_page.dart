@@ -14,6 +14,7 @@ class Leaderboard extends StatefulWidget {
 
 class _LeaderboardState extends State<Leaderboard> {
   //const Leaderboard({super.key});
+  // ignore: unused_field
   bool _isWalk = true;
   void _setIsWalk(bool isWalk) {
     setState(() {

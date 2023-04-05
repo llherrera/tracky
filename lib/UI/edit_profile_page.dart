@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:tracky/Widgets/profile_widgets/edit_user_form.dart';
-
 import 'home_page.dart';
 
 class EditarInfo extends StatefulWidget {
@@ -17,6 +14,7 @@ class EditarInfo extends StatefulWidget {
 }
 
 class _EditarInfoState extends State<EditarInfo> {
+  // ignore: unused_field
   late File _image;
   final picker = ImagePicker();
 

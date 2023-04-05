@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tracky/Data/activity.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/activity_widgets/start_button.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,6 +16,7 @@ class AddActivity extends StatefulWidget {
 class _AddActivityState extends State<AddActivity> {
   bool _isWalk = true;
   Position _currentPosition = Position(longitude: -74.78132, latitude: 10.96854, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
+  // ignore: unused_field
   late GoogleMapController _mapController;
 
   void _getCurrentLocation() async {

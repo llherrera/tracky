@@ -15,6 +15,7 @@ class SummaryPage extends StatefulWidget {
 }
 
 class _SummaryPageState extends State<SummaryPage> {
+  // ignore: unused_field
   GoogleMapController? _controller;
   final Set<Marker> _markers = {};
   final Set<Polyline> _polyline = {};
@@ -25,6 +26,7 @@ class _SummaryPageState extends State<SummaryPage> {
     final UserM? user = userP.user;
     final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
     final differenceTime = act.getDuration();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _route = act.routeList;
 
     for(int i=0; i<_route.length; i++){

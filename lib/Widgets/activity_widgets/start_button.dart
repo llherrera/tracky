@@ -15,6 +15,7 @@ const LocationSettings locationSettings = LocationSettings(
   distanceFilter: 100,
 );
 
+// ignore: must_be_immutable
 class StartButton extends StatefulWidget {
   StartButton({super.key, required this.isWalk});
   bool isWalk;
@@ -25,6 +26,7 @@ class StartButton extends StatefulWidget {
 
 class _StartButtonState extends State<StartButton> {
   bool _isPressed = false;
+  // ignore: prefer_final_fields
   List<Position> _routeList = [];
 
   @override

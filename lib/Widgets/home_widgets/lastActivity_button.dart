@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:tracky/Data/activity.dart';
-import 'package:tracky/Data/user.dart';
 import 'package:tracky/UI/activity_detail.dart';
 
+// ignore: must_be_immutable
 class LastActivityBtn extends StatefulWidget {
   LastActivityBtn({super.key, required this.act});
   Activity? act;

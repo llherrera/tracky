@@ -15,6 +15,7 @@ class Activitydetail extends StatefulWidget {
 
 class _ActivitydetailState extends State<Activitydetail> {
 
+  // ignore: unused_field
   GoogleMapController? _controller;
   final Set<Marker> _markers = {};
   final Set<Polyline> _polyline = {};
@@ -26,6 +27,7 @@ class _ActivitydetailState extends State<Activitydetail> {
     final UserM? user = userP.user;
     final Activity act = user?.activities[user.activities.length - 1] ?? Activity(DateTime.now(), true);
     final differenceTime = act.getDuration();
+    // ignore: no_leading_underscores_for_local_identifiers
     final _route = act.routeList;
 
     for(int i=0; i<_route.length; i++){

@@ -131,21 +131,21 @@ class Home extends StatelessWidget {
               ),
             ],
           ),
-          if (user?.activities.length == 0) ...[
+          if (user!.activities.isEmpty) ...[
             const Text(
               'No activities yet',
               style: TextStyle(color: Colors.white, fontSize: 20),
             )
-          ] else if (user?.activities.length == 1) ...[
+          ] else if (user.activities.length == 1) ...[
             LastActivityBtn(
-              act: user?.activities[user.activities.length - 1],
+              act: user.activities[user.activities.length - 1],
             ),
           ] else ...[
             LastActivityBtn(
-              act: user?.activities[user.activities.length - 1],
+              act: user.activities[user.activities.length - 1],
             ),
             LastActivityBtn(
-              act: user?.activities[user.activities.length - 2],
+              act: user.activities[user.activities.length - 2],
             )
           ],
         ]);
