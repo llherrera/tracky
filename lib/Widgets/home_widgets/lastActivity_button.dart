@@ -27,9 +27,7 @@ class _LastActivityBtnState extends State<LastActivityBtn> {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      onPressed: () {
-         Get.to(() => const Activitydetail());
-      },
+      onPressed: () {Get.to(() => Activitydetail(act: act));},
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(

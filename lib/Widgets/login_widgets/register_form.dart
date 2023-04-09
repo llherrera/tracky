@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import '../../Data/user.dart';
-import '../../Modelos/user_model.dart';
+import '../../Data/user_model.dart';
 import '../../UI/login_page.dart';
 import '../../UI/home_page.dart';
 
@@ -35,12 +35,12 @@ class _SignupForm extends State<SignupForm> {
   }
 
   Future<void> _submitForm() async {
-    var boxUser = Hive.box('users');
+    var boxUser = Hive.box<UserM>('userss');
     if (_username.isNotEmpty || _password.isNotEmpty || _email.isNotEmpty) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
       // ignore: no_leading_underscores_for_local_identifiers
-      UserM _user = UserM(_username, _email, _password, []);
-      boxUser.add(_user);
+      UserM _user = UserM(_username, _email, _password);
+      await boxUser.add(_user);
       userProvider.login(_user);
       Get.off(() => const HomePage());
       return;

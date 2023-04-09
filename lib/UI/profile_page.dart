@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:tracky/UI/historial_page.dart';
+import '../Data/activity.dart';
 import '../Data/user.dart';
-import '../Modelos/user_model.dart';
+import '../Data/user_model.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 import '../Widgets/profile_widgets/edit_out_buttons.dart';
 import '../Widgets/profile_widgets/statistics_button.dart';
@@ -13,8 +15,12 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userP = Provider.of<UserProvider>(context);
-    final UserM? user = userP.user;
+    var boxUser = Hive.box<UserM>('userss');
+    var boxAct = Hive.box<Activity>('activitiess');
+    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
+    final UserM? userLog = boxUser.get(userP.user!.key);
+    final Iterable<dynamic> act = boxAct.values.where((element) => element.userName == userLog?.name);
+    final List activities = act.toList();
     
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,7 +34,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  user?.name ?? 'User',
+                  userLog?.name ?? 'User',
                   style: const TextStyle(color: Colors.white, fontSize: 30),
                 ),
                 const Text(
@@ -69,26 +75,27 @@ class Profile extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                 Get.to(() => const HistorialPage());
+                Get.to(() => const HistorialPage());
               },
               child: const Text(
                 'View all',
                 style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                    fontSize: 15),
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                  fontSize: 15
+                ),
               ),
             ),
           ],
         ),
-        if (user!.activities.isEmpty) ...[
+        if (activities.isEmpty) ...[
           const Text(
             'No activities yet',
             style: TextStyle(color: Colors.white, fontSize: 20),
           )
         ] else ...[
           LastActivityBtn(
-            act: user.activities.last,
+            act: activities.last,
           )
         ]
       ],

@@ -5,12 +5,12 @@ import 'package:tracky/Data/activity.dart';
 void main() {
   group('Activity', () {
     test('La activida debe devolver la distancia', () {
-      final activity = Activity(DateTime.now(), true);
+      final activity = Activity(DateTime.now(), DateTime.now().add(Duration()), true, 'leo',[]);
       activity.addRoute();
       expect(activity.getDistance(), 0);
     });
     test('La activida debe devolver el tiempo', () {
-      final activity = Activity(DateTime.now(), true);
+      final activity = Activity(DateTime.now(), DateTime.now().add(Duration()), true, 'leo',[]);
       activity.addRoute();
       expect(activity.getDuration(), isNotNull);
     });

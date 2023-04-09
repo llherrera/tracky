@@ -17,7 +17,7 @@ class _AddActivityState extends State<AddActivity> {
   bool _isWalk = true;
   Position _currentPosition = Position(longitude: -74.78132, latitude: 10.96854, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
   // ignore: unused_field
-  late GoogleMapController _mapController;
+  GoogleMapController? _mapController;
 
   void _getCurrentLocation() async {
     final position = await _determinatePosition();
@@ -44,8 +44,7 @@ class _AddActivityState extends State<AddActivity> {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
     }
     return await Geolocator.getCurrentPosition();
   }
@@ -56,60 +55,61 @@ class _AddActivityState extends State<AddActivity> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color(0xFF4093CE),
-              Color(0xFF9BCEF3),
-        ])),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const SizedBox(height: 20),
-              Container(
-                alignment: Alignment.topCenter,
-                child: const Text(
-                  'Type of activity',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold),
-                ),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF4093CE),
+            Color(0xFF9BCEF3),
+          ]
+        )
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const SizedBox(height: 20),
+            Container(
+            alignment: Alignment.topCenter,
+            child: const Text(
+              'Type of activity',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 35,
+                fontWeight: FontWeight.bold),
               ),
-              SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
-              Container(
-                height: 250,
-                padding: const EdgeInsets.all(30.0),
-                child: GoogleMap(
-                  onMapCreated: (GoogleMapController controller) {
-                    _mapController = controller;
-                    _getCurrentLocation();
-                  },
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-                    zoom: 14,
-                  ),
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  zoomControlsEnabled: false,
-                  mapType: MapType.normal,
-                  compassEnabled: true,
+            ),
+            SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
+            Container(
+              height: 250,
+              padding: const EdgeInsets.all(30.0),
+              child: GoogleMap(
+                onMapCreated: (GoogleMapController controller) {
+                  _mapController = controller;
+                  _getCurrentLocation();
+                },
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+                  zoom: 17,
                 ),
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
+                zoomControlsEnabled: false,
+                mapType: MapType.normal,
+                compassEnabled: true,
               ),
-              const SizedBox(height: 5),
-              //Button
-              StartButton(isWalk: _isWalk,),
-            ],
-          ),
-        ));
+            ),
+            const SizedBox(height: 5),
+            StartButton(isWalk: _isWalk, mapController: _mapController),
+          ],
+        ),
+      )
+    );
   }
 }

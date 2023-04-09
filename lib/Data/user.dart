@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Modelos/user_model.dart';
+import 'package:geolocator/geolocator.dart';
+import 'user_model.dart';
 import '/Data/activity.dart';
 
 class User extends ChangeNotifier {
@@ -45,13 +46,10 @@ class User extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateActivity(Activity activity) {
-    if (activities.contains(activity)) {
-      activities[activities.indexOf(activity)] = activity;
-      notifyListeners();
-    }else{
-      addActivity(activity);
-    }
+  void updateActivity(DateTime dateEnd, List<Position> route) {
+    activities.last.dateEnd = dateEnd;
+    activities.last.routeList = route;
+    notifyListeners();
   }
 
   get getActivity => activities[activities.length - 1];

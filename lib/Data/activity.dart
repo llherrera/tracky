@@ -4,19 +4,23 @@ import 'package:hive/hive.dart';
 part 'activity.g.dart';
 
 @HiveType(typeId: 1)
-class Activity extends HiveObject{
+class Activity{
   static int intGen = 0;
   int id = intGen++;
   @HiveField(0)
   // ignore: prefer_typing_uninitialized_variables
   var dateStart;
+  @HiveField(1)
   // ignore: prefer_typing_uninitialized_variables
   var dateEnd;
-  List<Position> routeList = [];
-  @HiveField(1)
+  @HiveField(2)
   bool? type;
+  @HiveField(3)
+  final String userName;
+  @HiveField(4)
+  List<Position> routeList;
 
-  Activity(this.dateStart, this.type);
+  Activity(this.dateStart, this.dateEnd, this.type, this.userName, this.routeList);
 
   get getType => type;
 
@@ -30,10 +34,11 @@ class Activity extends HiveObject{
     double distance = 0;
     for (int i = 0; i < routeList.length - 1; i++) {
       distance += Geolocator.distanceBetween(
-          routeList[i].latitude,
-          routeList[i].longitude,
-          routeList[i + 1].latitude,
-          routeList[i + 1].longitude);
+        routeList[i].latitude,
+        routeList[i].longitude,
+        routeList[i + 1].latitude,
+        routeList[i + 1].longitude
+      );
     }
     return distance;
   }

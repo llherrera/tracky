@@ -37,13 +37,15 @@ class _EditarInfoState extends State<EditarInfo> {
             child: SingleChildScrollView(
               child: Container(
                 decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                      Color(0xFF4093CE),
-                      Color(0xFF9BCEF3),
-                    ])),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                    Color(0xFF4093CE),
+                    Color(0xFF9BCEF3),
+                    ]
+                  )
+                ),
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
                   children: <Widget>[
@@ -52,8 +54,7 @@ class _EditarInfoState extends State<EditarInfo> {
                       children: [
                         IconButton(
                           onPressed: () {Get.back();},
-                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                              size: 40),
+                          icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 40),
                           color: Colors.white,
                           padding: const EdgeInsets.only(top: 5.0, left: 5.0),
                         ),
@@ -72,7 +73,8 @@ class _EditarInfoState extends State<EditarInfo> {
                               style: TextStyle(
                                   fontSize: 50,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: Colors.white
+                              ),
                             ),
                             SizedBox(height: 10.0),
                             Text(

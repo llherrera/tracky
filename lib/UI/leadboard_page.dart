@@ -26,13 +26,15 @@ class _LeaderboardState extends State<Leaderboard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF4093CE),
-                Color(0xFF9BCEF3),
-      ])),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+          Color(0xFF4093CE),
+          Color(0xFF9BCEF3),
+          ]
+        )
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView( child:

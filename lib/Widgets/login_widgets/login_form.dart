@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import '../../Data/user.dart';
-import '../../Modelos/user_model.dart';
+import '../../Data/user_model.dart';
 import '../../UI/home_page.dart';
 import '../../UI/register_page.dart';
 import 'package:provider/provider.dart';
@@ -30,10 +30,13 @@ class _LoginForm extends State<LoginForm> {
   }
 
   Future<void> _submitForm() async {
-    var boxUser = Hive.box('users');
+    //await Hive.openBox<UserM>('users');
+    var boxUser = Hive.box<UserM>('userss');
     if (_username.isNotEmpty || _password.isNotEmpty) {
       UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
-      UserM? userLog = await boxUser.values.where((element) => element.name == _username && element.password == _password).first;
+      //UserM? userLog = boxUser.get();
+      Iterable<dynamic> users = boxUser.values.where((element) => element.name == _username && element.password == _password);
+      UserM? userLog = users.isEmpty ? null : users.first;
       if (userLog != null) {
         userProvider.login(userLog);
         Get.off(() => const HomePage());
@@ -117,8 +120,8 @@ class _LoginForm extends State<LoginForm> {
         padding: const EdgeInsets.symmetric(vertical: 12),
       ),
       child: const Text('Log in',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)
+      ),
     );
     return loginBtn;
   }
@@ -126,6 +129,7 @@ class _LoginForm extends State<LoginForm> {
   Widget registerButton() {
     final btn = ElevatedButton(
       onPressed: () {
+        //await Hive.box<UserM>('users').clear();
         Get.off(() => const SignupPage());
       },
       style: ElevatedButton.styleFrom(
@@ -137,8 +141,8 @@ class _LoginForm extends State<LoginForm> {
         padding: const EdgeInsets.symmetric(vertical: 12),
       ),
       child: const Text('Sign up',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)
+      ),
     );
     return btn;
   }
@@ -147,11 +151,13 @@ class _LoginForm extends State<LoginForm> {
     final btn = TextButton(
       onPressed: () {},
       child: const Text('Forgot password?',
-          style: TextStyle(
-              color: Color(0xFF858484),
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline)),
+        style: TextStyle(
+          color: Color(0xFF858484),
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline
+        )
+      ),
     );
     return btn;
   }
@@ -197,17 +203,18 @@ class _CheckBoxState extends State<CheckBox> {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-        value: _selected,
-        onChanged: (value) {
-          setState(() {
-            _selected = value!;
-          });
-        },
-        title: const Text('Keep me logged in',
-            style: TextStyle(color: Color(0xFF505050), fontSize: 14)),
-        controlAffinity: ListTileControlAffinity.leading,
-        activeColor: Colors.transparent,
-        checkColor: const Color(0xFF505050),
-        side: const BorderSide(color: Color(0xFF505050)));
+      value: _selected,
+      onChanged: (value) {
+        setState(() {
+          _selected = value!;
+        });
+      },
+      title: const Text('Keep me logged in',
+        style: TextStyle(color: Color(0xFF505050), fontSize: 14)),
+      controlAffinity: ListTileControlAffinity.leading,
+      activeColor: Colors.transparent,
+      checkColor: const Color(0xFF505050),
+      side: const BorderSide(color: Color(0xFF505050))
+    );
   }
 }
