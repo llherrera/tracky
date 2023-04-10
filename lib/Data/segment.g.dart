@@ -19,17 +19,20 @@ class SegmentAdapter extends TypeAdapter<Segment> {
     return Segment(
       fields[0] as Position,
       fields[1] as Position,
+      (fields[2] as List).cast<Position>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Segment obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.start)
       ..writeByte(1)
-      ..write(obj.end);
+      ..write(obj.end)
+      ..writeByte(2)
+      ..write(obj.routeList);
   }
 
   @override

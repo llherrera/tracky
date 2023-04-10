@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import '../../Data/segment.dart';
 
 class TableSegments extends StatelessWidget {
   const TableSegments({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var boxSegm = Hive.box<Segment>('segments');
     return Column(
       children: <Widget>[
         Container(
@@ -21,22 +25,31 @@ class TableSegments extends StatelessWidget {
             ],
           )
         ),
-        Column(
-          children: const <Widget>[
-            SegmentPositions(),
-            SegmentPositions(),
-            SegmentPositions(),
-            SegmentPositions(),
-            SegmentPositions(),
-          ]
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          reverse: true,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: boxSegm.length,
+          itemBuilder: (context, index) {
+            return Container(
+              child: SegmentPositions()
+            );
+          }
         )
-      ],
+      ]
     );
   }
 }
 
-class SegmentPositions extends StatelessWidget {
+class SegmentPositions extends StatefulWidget {
   const SegmentPositions({super.key});
+
+  @override
+  State<SegmentPositions> createState() => _SegmentPositionsState();
+}
+
+class _SegmentPositionsState extends State<SegmentPositions> {
 
   @override
   Widget build(BuildContext context) {

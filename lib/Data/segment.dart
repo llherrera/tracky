@@ -9,7 +9,8 @@ class Segment  extends HiveObject{
   Position start;
   @HiveField(1)
   Position end;
-  List<Position> routeList = [];
+  @HiveField(2)
+  List<Position> routeList;
 
-  Segment(this.start, this.end);
+  Segment(this.start, this.end, this.routeList);
 }

@@ -39,13 +39,8 @@ class DeleteActBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     final btn = ElevatedButton(
       onPressed: () {
-        var boxUser = Hive.box<UserM>('userss');
         var boxAct = Hive.box<Activity>('activitiess');
-        final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-        final UserM? userLog = boxUser.get(userP.user!.key);
-        final Iterable<dynamic> act = boxAct.values.where((element) => element.userName == userLog?.name);
-        final List activities = act.toList();
-        boxAct.deleteAt(activities.last.key);
+        boxAct.deleteAt(boxAct.length - 1);
         Get.to(() => const HomePage());
       },
       style: ElevatedButton.styleFrom(

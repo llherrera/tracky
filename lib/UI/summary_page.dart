@@ -48,9 +48,8 @@ class _SummaryPageState extends State<SummaryPage> {
           icon: BitmapDescriptor.defaultMarker,
           onTap: () {
             _StartSeg == null ? _StartSeg = _route[i] : _EndSeg = _route[i];
-            //  _StartSeg = _route[i];
-            //else
-            //  _EndSeg = _route[i];
+            print(_StartSeg.toString());
+            print(_EndSeg.toString());
           },
         )
       );
@@ -67,21 +66,21 @@ class _SummaryPageState extends State<SummaryPage> {
     }
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           if (_StartSeg != null && _EndSeg != null){
-            Segment s = Segment(_StartSeg!, _EndSeg!);
             bool temp = false;
+            List<Position> points = [];
             for (int i = 0; i < _route.length; i++) {
               if (_route[i] == _StartSeg || _route[i] == _EndSeg) {
                 temp = !temp;
               }
               if (temp) {
-                s.routeList.add(_route[i]);
+                points.add(_route[i]);
               }
             }
+            Segment s = Segment(_StartSeg!, _EndSeg!, points);
             var boxSegm = Hive.box<Segment>('segments');
-            boxSegm.add(s);
-            boxSegm.close();
+            await boxSegm.add(s);
           }
         },
         child: const Icon(Icons.map),
@@ -143,8 +142,8 @@ class _SummaryPageState extends State<SummaryPage> {
                 onMapCreated: (GoogleMapController controller) {
                   _controller =controller;
                 },
-                initialCameraPosition: const CameraPosition(
-                  target: LatLng(10.96854, -74.78132),
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(_route.last.latitude, _route.last.latitude),
                   zoom: 17,
                 ),
                 myLocationEnabled: true,
@@ -161,7 +160,7 @@ class _SummaryPageState extends State<SummaryPage> {
             Padding(
               padding: const EdgeInsets.only(left: 40),
               child: Text(
-                'Km: ${act.getDistance()} km',
+                'M: ${act.getDistance().toString()} M',
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

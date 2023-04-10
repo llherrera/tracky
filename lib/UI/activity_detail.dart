@@ -88,7 +88,8 @@ class _ActivitydetailState extends State<Activitydetail> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 35,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 )
@@ -109,9 +110,9 @@ class _ActivitydetailState extends State<Activitydetail> {
                 onMapCreated: (GoogleMapController controller) {
                   _controller = controller;
                 },
-                initialCameraPosition: const CameraPosition(
-                  target: LatLng(10.96854, -74.78132),
-                  zoom: 14,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(_route.last.latitude, _route.last.longitude),
+                  zoom: 17,
                 ),
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
@@ -119,6 +120,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                 mapType: MapType.normal,
                 compassEnabled: true,
                 markers: _markers,
+                polylines: _polyline,
               ),
             ),
             Center(
@@ -172,7 +174,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                         fontWeight: FontWeight.bold
                       )
                     ),
-                    Text('${widget.act!.getDistance()} km',
+                    Text('${widget.act!.getDistance()} M',
                       style: const TextStyle(color: Colors.black, fontSize: 20)
                     ),
                   ],

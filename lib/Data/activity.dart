@@ -37,7 +37,7 @@ class Activity{
         routeList[i].latitude,
         routeList[i].longitude,
         routeList[i + 1].latitude,
-        routeList[i + 1].longitude
+        routeList[i + 1].longitude,
       );
     }
     return distance;
