@@ -27,8 +27,7 @@ class SignupPage extends StatelessWidget {
             ClipPath(
               clipper: HalfCircleClipper(),
               child: Container(
-                height: MediaQuery.of(context).size.width *
-                    0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
+                height: MediaQuery.of(context).size.width * 0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/cycling.png'),
@@ -38,14 +37,14 @@ class SignupPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(30, 0, 10,
-                  10), // Aqui se definen los margenes para la palabra tracky
+              margin: const EdgeInsets.fromLTRB(30, 0, 10, 10), // Aqui se definen los margenes para la palabra tracky
               child: const Text(
                 'Create Account',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold
+                ),
               ),
             ),
             Container(
@@ -55,8 +54,7 @@ class SignupPage extends StatelessWidget {
               ),
               margin: const EdgeInsets.all(10),
               child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: const SignupForm(),
               ),
             ),

@@ -63,7 +63,8 @@ class _ActivitydetailState extends State<Activitydetail> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
+        body: SingleChildScrollView(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -182,6 +183,7 @@ class _ActivitydetailState extends State<Activitydetail> {
               ),
             ),
           ],
+        )
         )
       )
     );
