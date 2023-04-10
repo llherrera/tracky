@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'user_model.dart';
 import '/Data/activity.dart';
 
 class User extends ChangeNotifier {
+  static int intGen = 0;
+  int id = intGen++;
   String username;
   String email;
   String password;
@@ -42,27 +46,21 @@ class User extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateActivity(Activity activity) {
-    if (activities.contains(activity)) {
-      activities[activities.indexOf(activity)] = activity;
-      notifyListeners();
-    }else{
-      addActivity(activity);
-    }
-    //activities[activity.id] = activity;
+  void updateActivity(DateTime dateEnd, List<Position> route) {
+    activities.last.dateEnd = dateEnd;
+    activities.last.routeList = route;
+    notifyListeners();
   }
 
   get getActivity => activities[activities.length - 1];
 }
 
 class UserProvider with ChangeNotifier {
-  User? _user;
+  UserM? _user;
 
-  //UserProvider(this._user);
+  UserM? get user => _user;
 
-  User? get user => _user;
-
-  void login(User user) {
+  void login(UserM user) {
     _user = user;
     notifyListeners();
   }

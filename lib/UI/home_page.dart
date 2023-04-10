@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:tracky/Data/activity.dart';
 import '../Data/user.dart';
+import 'package:get/get.dart';
+import '../Data/user_model.dart';
 import 'profile_page.dart';
 import 'leadboard_page.dart';
+import 'historial_page.dart';
 import '../Widgets/home_widgets/addActivity_button.dart';
 import '../Widgets/home_widgets/lastActivity_button.dart';
 
@@ -14,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
@@ -36,17 +40,18 @@ class _HomePage extends State<HomePage> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF4093CE),
-            Color(0xFF9BCEF3),
+          Color(0xFF4093CE),
+          Color(0xFF9BCEF3),
           ]
         )
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Container(
-          margin: const EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 10),
+          margin:
+            const EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 10),
           child: _widgetOptions.elementAt(_selectedIndex)
-        ), 
+        ),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
           iconSize: 20,
@@ -78,8 +83,12 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxUser = Hive.box<UserM>('userss');
+    var boxAct = Hive.box<Activity>('activitiess');
     final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-    final User? user = userP.user;
+    final UserM? userLog = boxUser.get(userP.user!.key);
+    final Iterable<dynamic> act = boxAct.values.where((element) => element.userName == userLog?.name);
+    final List activities = act.toList();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,19 +97,37 @@ class Home extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Welcome ${user?.getUsername ?? 'User'}!', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
-            const Icon(Icons.person, color: Colors.white, size: 30,)
+            Text(
+              'Welcome ${userLog?.name ?? 'User'}!',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            const Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 40,
+            )
           ],
         ),
-        const Text("Let's exercise your day!", style: TextStyle(color: Colors.white, fontSize: 30), textAlign: TextAlign.right,),
+        const Text(
+          "Let's exercise your day!",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+          textAlign: TextAlign.right,
+        ),
         const AddActivityButton(),
         const SizedBox(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Last Activity', style: TextStyle(color: Colors.white, fontSize: 20),),
+            const Text(
+              'Last Activity',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {Get.to(() => const HistorialPage());},
               child: const Text(
                 'View all',
                 style: TextStyle(
@@ -112,14 +139,14 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        if (user?.activities.length == 0) ...[
+        if (activities.isEmpty) ...[
           const Text('No activities yet', style: TextStyle(color: Colors.white, fontSize: 20),)
-        ] else if (user?.activities.length == 1) ...[
-          const LastActivityBtn(),
+        ] else if (activities.length == 1) ...[
+          LastActivityBtn(act: activities.last),
         ] else ...[
-          const LastActivityBtn(),
-          const UnLastActivityBtn(),
-        ]
+          LastActivityBtn(act: activities.last),
+          LastActivityBtn(act: activities[activities.length - 2])
+        ],
       ]
     );
   }

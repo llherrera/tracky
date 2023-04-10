@@ -48,7 +48,9 @@ class LogOutBtn extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
-      onPressed: () {Get.off(() => const LoginPage());},
+      onPressed: () {
+        Get.off(() => const LoginPage());
+      },
       child: Row(
         children: const <Widget>[
           Text(

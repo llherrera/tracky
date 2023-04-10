@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../Widgets/login_widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key});
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,52 +17,52 @@ class LoginPage extends StatelessWidget {
           ],
         ),
       ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ClipPath(
-              clipper: HalfCircleClipper(),
-              child: Container(
-                height: MediaQuery.of(context).size.width *
-                    0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/testee.png'),
-                    fit: BoxFit.fill,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              ClipPath(
+                clipper: HalfCircleClipper(),
+                child: Container(
+                  height: MediaQuery.of(context).size.width *0.60, // Aqui se define el tamaño que tendrá el medio circulo de la imagen
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/testee.png'),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(30, 0, 10,
-                  10), // Aqui se definen los margenes para la palabra tracky
-              child: const Text(
-                'Tracky',
-                style: TextStyle(
+              Container(
+                margin: const EdgeInsets.fromLTRB(30, 0, 10, 10), // Aqui se definen los margenes para la palabra tracky
+                child: const Text(
+                  'Tracky',
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFFE5E5E5),
-                borderRadius: BorderRadius.circular(10),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE5E5E5),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: const EdgeInsets.all(10),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: const LoginForm(),
+                ),
               ),
-              margin: const EdgeInsets.all(10),
-              child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: const LoginForm(),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

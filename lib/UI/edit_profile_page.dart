@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:tracky/Widgets/profile_widgets/edit_user_form.dart';
-
 import 'home_page.dart';
 
 class EditarInfo extends StatefulWidget {
@@ -17,6 +14,7 @@ class EditarInfo extends StatefulWidget {
 }
 
 class _EditarInfoState extends State<EditarInfo> {
+  // ignore: unused_field
   late File _image;
   final picker = ImagePicker();
 
@@ -39,13 +37,15 @@ class _EditarInfoState extends State<EditarInfo> {
             child: SingleChildScrollView(
               child: Container(
                 decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                      Color(0xFF4093CE),
-                      Color(0xFF9BCEF3),
-                    ])),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                    Color(0xFF4093CE),
+                    Color(0xFF9BCEF3),
+                    ]
+                  )
+                ),
                 padding: const EdgeInsets.all(35.0),
                 child: Column(
                   children: <Widget>[
@@ -54,8 +54,7 @@ class _EditarInfoState extends State<EditarInfo> {
                       children: [
                         IconButton(
                           onPressed: () {Get.back();},
-                          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-                              size: 40),
+                          icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 40),
                           color: Colors.white,
                           padding: const EdgeInsets.only(top: 5.0, left: 5.0),
                         ),
@@ -74,7 +73,8 @@ class _EditarInfoState extends State<EditarInfo> {
                               style: TextStyle(
                                   fontSize: 50,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: Colors.white
+                              ),
                             ),
                             SizedBox(height: 10.0),
                             Text(
