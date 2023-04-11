@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import '../Data/segment.dart';
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/leadboard_widgets/search_field.dart';
 import '../Widgets/leadboard_widgets/table_segments.dart';
-import 'save_segment.dart';
 
 class Leaderboard extends StatefulWidget {
   const Leaderboard({super.key});
@@ -59,10 +57,10 @@ class _LeaderboardState extends State<Leaderboard> {
                 margin: const EdgeInsets.only(top: 20),
                 child: SelectActivity(isWalk: true, callback: _setIsWalk,),
               ),
-              Container(
+              /*Container(
                 margin: const EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 20),
                 child: const SearchField(),
-              ),
+              ),*/
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: const TableSegments(),
