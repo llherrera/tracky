@@ -1,17 +1,17 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import 'package:tracky/Data/segment.dart';
-import 'package:tracky/Data/user.dart';
 import '../Data/activity.dart';
-import '../Data/user_model.dart';
 import '../Widgets/summary_widgets/save_delete_buttons.dart';
 
+// ignore: must_be_immutable
 class SummaryPage extends StatefulWidget {
-  const SummaryPage({Key? key}) : super(key: key);
-
+  SummaryPage({super.key, required this.act});
+  Activity? act;
   @override
   // ignore: library_private_types_in_public_api
   _SummaryPageState createState() => _SummaryPageState();
@@ -21,6 +21,8 @@ class _SummaryPageState extends State<SummaryPage> {
   // ignore: unused_field
   GoogleMapController? _controller;
   final Set<Polyline> _polyline = {};
+  double indexS = 0.0;
+  double indexE = 1.0;
   RangeValues indexRange = const RangeValues(0, 1);
   // ignore: no_leading_underscores_for_local_identifiers
   Marker? _markersS;
@@ -29,28 +31,31 @@ class _SummaryPageState extends State<SummaryPage> {
   Set<Marker> _markersSE = {};
 
   @override
+  void initState() {
+    super.initState();
+    indexE = widget.act!.routeList.length - 1;
+    indexRange = RangeValues(indexS, indexE);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var boxUser = Hive.box<UserM>('userss');
-    var boxAct = Hive.box<Activity>('activitiess');
-    final UserProvider userP = Provider.of<UserProvider>(context, listen: false);
-    final UserM? userLog = boxUser.get(userP.user!.key);
-    final Iterable<dynamic> acts = boxAct.values.where((element) => element.userName == userLog?.name);
-    final List activities = acts.toList();
-    final Activity act = activities.last ?? Activity(DateTime.now(), DateTime.now(), true, userLog!.name, []);
-    final differenceTime = act.getDuration();
+    final differenceTime = widget.act!.getDuration();
     // ignore: no_leading_underscores_for_local_identifiers
-    final _route = act.routeList;
-    indexRange = RangeValues(0, _route.length - 1);
+    final _route = widget.act!.routeList;
+    indexS = indexRange.start;
+    indexE = indexRange.end;
+    indexRange = RangeValues(indexS, indexE);
     _markersS = Marker(
-      markerId: MarkerId(_route.first.toString()),
-      position: LatLng(_route.first.latitude, _route.first.longitude),
+      markerId: MarkerId(_route[indexRange.start.toInt()].toString()),
+      position: LatLng(_route[indexRange.start.toInt()].latitude, _route[indexRange.start.toInt()].longitude),
       icon: BitmapDescriptor.defaultMarker,
     );
     _markersE = Marker(
-      markerId: MarkerId(_route.last.toString()),
-      position: LatLng(_route.last.latitude, _route.last.longitude),
+      markerId: MarkerId(_route[indexRange.end.toInt()].toString()),
+      position: LatLng(_route[indexRange.end.toInt()].latitude, _route[indexRange.end.toInt()].longitude),
       icon: BitmapDescriptor.defaultMarker,
     );
+    _markersSE = { _markersS!, _markersE! };
 
     for(int i=0; i<_route.length; i++){
       setState(() {
@@ -121,7 +126,7 @@ class _SummaryPageState extends State<SummaryPage> {
               const SizedBox(height: 20.0),
               Padding(
                 padding: const EdgeInsets.only(left: 50.0),
-                child: Text(act.type! ? 'Running' : 'Cycling',
+                child: Text(widget.act!.type! ? 'Running' : 'Cycling',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
@@ -134,6 +139,11 @@ class _SummaryPageState extends State<SummaryPage> {
                 height: 250,
                 padding: const EdgeInsets.all(30.0),
                 child: GoogleMap(
+                  gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                    Factory<OneSequenceGestureRecognizer>(
+                      () => EagerGestureRecognizer(),
+                    ),
+                  },
                   onMapCreated: (GoogleMapController controller) {
                     _controller = controller;
                   },
@@ -155,7 +165,7 @@ class _SummaryPageState extends State<SummaryPage> {
                 builder: (BuildContext context, state) {
                   return RangeSlider(
                     values: indexRange,
-                    divisions: _route.isNotEmpty ? 1 : _route.length - 1,
+                    divisions: _route.isEmpty ? 1 : _route.length - 1,
                     min: 0,
                     max: _route.length - 1,
                     onChanged: (values) {
@@ -171,10 +181,9 @@ class _SummaryPageState extends State<SummaryPage> {
                           position: LatLng(_route[values.end.toInt()].latitude, _route[values.end.toInt()].longitude),
                           icon: BitmapDescriptor.defaultMarker,
                         );
-                        _markersSE = {_markersS!, _markersE!};
+                        _markersSE = { _markersS!, _markersE! };
                       });
                       setState(() {
-
                       });
                     }
                   );
@@ -184,7 +193,7 @@ class _SummaryPageState extends State<SummaryPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 40),
                 child: Text(
-                  'M: ${act.getDistance().toString()} M',
+                  'M: ${widget.act!.getDistance().toString()} M',
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
