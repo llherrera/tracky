@@ -51,7 +51,7 @@ class _SummaryPageState extends State<SummaryPage> {
       position: LatLng(_route.last.latitude, _route.last.longitude),
       icon: BitmapDescriptor.defaultMarker,
     );
-    _markersSE = { _markersS, _markersE};
+    _markersSE = { _markersS!, _markersE!};
 
     for(int i=0; i<_route.length; i++){
       setState(() {
