@@ -50,7 +50,11 @@ class _MyAppState extends State<MyApp> {
     box1 = await Hive.openBox<UserM>('userss');
     box2 = await Hive.openBox<Activity>('activitiess');
     box3 = await Hive.openBox<Segment>('segments');
-    //Hive.deleteFromDisk();
+    /*Hive.deleteBoxFromDisk('userss');
+    Hive.deleteBoxFromDisk('activitiess');
+    Hive.deleteBoxFromDisk('users');
+    Hive.deleteBoxFromDisk('activities');
+    Hive.deleteBoxFromDisk('segments');*/
   }
 
   @override

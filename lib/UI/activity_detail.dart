@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive/hive.dart';
 import '../Data/activity.dart';
 import 'package:get/get.dart';
+
+import '../Data/segment.dart';
 
 // ignore: must_be_immutable
 class Activitydetail extends StatefulWidget {
@@ -16,28 +20,38 @@ class _ActivitydetailState extends State<Activitydetail> {
 
   // ignore: unused_field
   GoogleMapController? _controller;
-  final Set<Marker> _markers = {};
   final Set<Polyline> _polyline = {};
+  double indexS = 0.0;
+  double indexE = 1.0;
+  RangeValues indexRange = const RangeValues(0, 1);
+  // ignore: no_leading_underscores_for_local_identifiers
+  Marker? _markersS;
+  // ignore: no_leading_underscores_for_local_identifiers
+  Marker? _markersE;
+  Set<Marker> _markersSE = {};
 
   @override
   Widget build(BuildContext context) {
     final differenceTime = widget.act!.getDuration();
     // ignore: no_leading_underscores_for_local_identifiers
     final _route = widget.act!.routeList;
+    indexS = 0;
+    indexE = _route.length - 1;
+    indexRange = RangeValues(indexS, indexE);
+    //indexRange = RangeValues(0, _route.length.toDouble() - 1);
+    _markersS = Marker(
+      markerId: MarkerId(_route.first.toString()),
+      position: LatLng(_route.first.latitude, _route.first.longitude),
+      icon: BitmapDescriptor.defaultMarker,
+    );
+    _markersE = Marker(
+      markerId: MarkerId(_route.last.toString()),
+      position: LatLng(_route.last.latitude, _route.last.longitude),
+      icon: BitmapDescriptor.defaultMarker,
+    );
+    _markersSE = {_markersS!, _markersE!};
 
     for(int i=0; i<_route.length; i++){
-      _markers.add(
-        // added markers
-        Marker(
-            markerId: MarkerId(i.toString()),
-          position: LatLng(_route[i].latitude, _route[i].longitude),
-          /*infoWindow: InfoWindow(
-            title: 'HOTEL',
-            snippet: '5 Star Hotel',
-          ),*/
-          icon: BitmapDescriptor.defaultMarker,
-        )
-      );
       setState(() {
  
       });
@@ -63,7 +77,23 @@ class _ActivitydetailState extends State<Activitydetail> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            var boxseg = Hive.box<Segment>('segments');
+            int startSegment = indexRange.start.toInt();
+            int endSegment = indexRange.end.toInt();
+            List<Position> segment = [];
+            for(int i=startSegment; i<=endSegment; i++){
+              segment.add(_route[i]);
+            }
+            Segment s = Segment(segment.first, segment.last, segment);
+            boxseg.add(s);
+          },
+          backgroundColor: Colors.white,
+          child: const Icon(Icons.add),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -102,7 +132,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 10.0),
             Container(
               height: 250,
               padding: const EdgeInsets.all(30.0),
@@ -119,9 +149,38 @@ class _ActivitydetailState extends State<Activitydetail> {
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
                 compassEnabled: true,
-                markers: _markers,
+                markers: _markersSE,
                 polylines: _polyline,
               ),
+            ),
+            StatefulBuilder(
+              builder: (BuildContext context, state) {
+                return RangeSlider(
+                  values: indexRange,
+                  divisions: _route.isNotEmpty ? 1 : _route.length - 1,
+                  min: 0,
+                  max: _route.length - 1,
+                  onChanged: (values) {
+                    state(() {
+                      indexRange = values;
+                      _markersS = Marker(
+                        markerId: MarkerId(_route[values.start.toInt()].toString()),
+                        position: LatLng(_route[values.start.toInt()].latitude, _route[values.start.toInt()].longitude),
+                        icon: BitmapDescriptor.defaultMarker,
+                      );
+                      _markersE = Marker(
+                        markerId: MarkerId(_route[values.end.toInt()].toString()),
+                        position: LatLng(_route[values.end.toInt()].latitude, _route[values.end.toInt()].longitude),
+                        icon: BitmapDescriptor.defaultMarker,
+                      );
+                      _markersSE = {_markersS!, _markersE!};
+                    });
+                    setState(() {
+                      
+                    });
+                  }
+                );
+              },
             ),
             Center(
               child: Container(
@@ -184,6 +243,6 @@ class _ActivitydetailState extends State<Activitydetail> {
           ],
         )
       )
-    );
+    ));
   }
 }

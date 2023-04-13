@@ -78,9 +78,11 @@ class _HistorialPageState extends State<HistorialPage> {
               ),
               SelectActivity(isWalk: _isWalk, callback: _setIsWalk),
               if (activities.isEmpty) ...[
-                const Text(
-                  'No activities yet',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                const Center(
+                  child: Text(
+                    'No activities yet',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )
                 )
               ] else ...[
                 ListView.builder(

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import 'package:tracky/UI/home_page.dart';
 
 import '../../Data/activity.dart';
-import '../../Data/user.dart';
-import '../../Data/user_model.dart';
 
 class SaveActBtn extends StatelessWidget {
   const SaveActBtn({super.key});
