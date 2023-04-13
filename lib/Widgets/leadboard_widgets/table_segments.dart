@@ -76,7 +76,7 @@ class _SegmentPositionsState extends State<SegmentPositions> {
       for (int j = 0; j < act.routeList.length; j++) {
         for (int k = 0; k < segment.routeList.length; k++) {
           double dist = Geolocator.distanceBetween(act.routeList[j].latitude, act.routeList[j].longitude, segment.routeList[k].latitude, segment.routeList[k].longitude);
-          if (dist < 2) {
+          if (dist < 5) {
             temp+=1;
           }
         }
@@ -92,8 +92,6 @@ class _SegmentPositionsState extends State<SegmentPositions> {
   Widget build(BuildContext context) {
     List<Activity> acts = getActivities(widget.s!);
     Map<String, List<Activity>> groupAct = groupBy<Activity, String>(acts, (a) => a.userName);
-    //print(groupAct[groupAct.keys.elementAt(0)]);
-    //final Iterable<dynamic> users = acts.where((element) => element.userName == user?.name);
     final segm = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -108,11 +106,11 @@ class _SegmentPositionsState extends State<SegmentPositions> {
             double avg = times.map((time) => time.inMinutes).reduce((a, b) => a+b)/times.length;
             Duration min = times.reduce((a, b) => a.compareTo(b) < 0 ? a : b);
             return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(groupAct.keys.elementAt(index), style: const TextStyle(color: Colors.white, fontSize: 20)),
                 Text(avg.toString(), style: const TextStyle(color: Colors.white, fontSize: 20)),
-                Text(min.toString(), style: const TextStyle(color: Colors.white, fontSize: 20)),
+                Text(min.toString().substring(0, 7), style: const TextStyle(color: Colors.white, fontSize: 20)),
               ],
             );
           }
