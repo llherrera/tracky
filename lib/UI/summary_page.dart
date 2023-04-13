@@ -156,7 +156,7 @@ class _SummaryPageState extends State<SummaryPage> {
                 builder: (BuildContext context, state) {
                   return RangeSlider(
                     values: indexRange,
-                    divisions: _route.isNotEmpty ? 1 : _route.length - 1,
+                    divisions: _route.isEmpty ? 1 : _route.length - 1,
                     min: 0,
                     max: _route.length - 1,
                     onChanged: (values) {
