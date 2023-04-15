@@ -119,80 +119,7 @@ class _SummaryPageState extends State<SummaryPage> {
                       ),
                     ),
                   ),
-                ),
-                Icon(Icons.timer_outlined, size: 40, color: Colors.white,
-                ),
-              ],
-            ),
-            const SizedBox(height: 20.0),
-            //FILA 3 - PARA EL NOMBRE DEL EJERCICIO
-            Padding(
-              padding: const EdgeInsets.only(left: 50.0),
-              child: Text(act.type! ? 'Running' : 'Cycling',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ),
-            // FILA 4 - PARA EL MAPA
-            const SizedBox(height: 10.0),
-            Container(
-              height: 250,
-              padding: const EdgeInsets.all(30.0),
-              child: GoogleMap(
-                onMapCreated: (GoogleMapController controller) {
-                  _controller =controller;
-                },
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(_route.last.latitude, _route.last.latitude),
-                  zoom: 17,
-                ),
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-                zoomControlsEnabled: false,
-                mapType: MapType.normal,
-                compassEnabled: true,
-                markers: _markers,
-                polylines: _polyline,
-              ),
-            ),
-            // FILA 5 - PARA EL TEXTO DE KILOMETROS
-            const SizedBox(height: 10.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 40),
-              child: Text(
-                'Distance: ${act.getDistance().toString()} KM',
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              ),
-            ),
-            // FILA 6 - PARA EL TEXTO DE TIEMPO
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.only(left: 40),
-              child: Text('Time: ${differenceTime.toString().substring(0, 7)}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white
-                ),
-              ),
-            ),
-            // FILA 7 - PARA LOS BOTONES DE GUARDAR Y ELIMINAR
-            const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.only(left: 40, right: 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const <Widget>[
-                  Expanded(
-                    flex: 4,
-                    child: SaveActBtn(),
-                  ),
+                  Icon(Icons.timer_outlined, size: 40, color: Colors.white,),
                 ],
               ),
               const SizedBox(height: 20.0),
@@ -223,8 +150,6 @@ class _SummaryPageState extends State<SummaryPage> {
                     target: LatLng(_route.last.latitude, _route.last.longitude),
                     zoom: 17,
                   ),
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
                   zoomControlsEnabled: false,
                   mapType: MapType.normal,
                   compassEnabled: true,
@@ -265,7 +190,7 @@ class _SummaryPageState extends State<SummaryPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 40),
                 child: Text(
-                  'M: ${widget.act!.getDistance().toString()} M',
+                  'Distance: ${widget.act!.getDistance().toString()} KM',
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
