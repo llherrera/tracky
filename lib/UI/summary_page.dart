@@ -160,7 +160,7 @@ class _SummaryPageState extends State<SummaryPage> {
             Padding(
               padding: const EdgeInsets.only(left: 40),
               child: Text(
-                'M: ${act.getDistance().toString()} M',
+                'Distance: ${act.getDistance().toString()} KM',
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

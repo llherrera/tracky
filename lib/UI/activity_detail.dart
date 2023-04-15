@@ -175,7 +175,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                         fontWeight: FontWeight.bold
                       )
                     ),
-                    Text('${widget.act!.getDistance()} M',
+                    Text('${widget.act!.getDistance()} KM',
                       style: const TextStyle(color: Colors.black, fontSize: 20)
                     ),
                   ],

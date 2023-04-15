@@ -21,7 +21,14 @@ class LoginPage extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
-          body: Column(
+          body: SingleChildScrollView(
+          // Agregado el widget SingleChildScrollView
+          reverse: true, 
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context)
+                  .viewInsets
+                  .bottom), 
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -62,6 +69,7 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
+        )
       )
     );
   }

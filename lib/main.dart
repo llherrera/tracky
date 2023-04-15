@@ -9,6 +9,7 @@ import 'Data/segment.dart';
 import 'Data/user.dart';
 import 'Data/user_model.dart';
 import 'UI/login_page.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,8 @@ void main() async {
   Hive.registerAdapter(ActivityAdapter());
   Hive.registerAdapter(SegmentAdapter());
   await Hive.initFlutter();
+    SystemChrome.setPreferredOrientations([  
+    DeviceOrientation.portraitUp,  DeviceOrientation.portraitDown,]);
   runApp(
     MultiProvider(
       providers: [
