@@ -42,8 +42,9 @@ class _LeaderboardState extends State<Leaderboard> {
                 margin: const EdgeInsets.only(top: 20),
                 child: SelectActivity(isWalk: true, callback: _setIsWalk,),
               ),
+              const SizedBox(height: 20,),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: const TableSegments(),
               )
             ],

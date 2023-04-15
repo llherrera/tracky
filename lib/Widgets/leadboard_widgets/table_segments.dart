@@ -73,15 +73,19 @@ class _SegmentPositionsState extends State<SegmentPositions> {
     List<Activity> acts = [];
     for (var act in boxActs.values) {
       int temp = 0;
-      for (int j = 0; j < act.routeList.length; j++) {
-        for (int k = 0; k < segment.routeList.length; k++) {
-          double dist = Geolocator.distanceBetween(act.routeList[j].latitude, act.routeList[j].longitude, segment.routeList[k].latitude, segment.routeList[k].longitude);
-          if (dist < 5) {
+      for (var j in act.routeList) {
+        for (var k in segment.routeList) {
+          double dist = Geolocator.distanceBetween(
+            k.latitude,
+            k.longitude,
+            j.latitude,
+            j.longitude);
+          if (dist < 10) {
             temp+=1;
           }
         }
       }
-      if (temp == segment.routeList.length) {
+      if (temp > segment.routeList.length/2) {
         acts.add(act);
       }
     }

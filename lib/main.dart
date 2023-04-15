@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:tracky/hive_service.dart';
 import 'Data/activity.dart';
 import 'Data/position.g.dart';
 import 'Data/segment.dart';
@@ -23,7 +22,6 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => HiveService()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: const MyApp(),
@@ -53,11 +51,11 @@ class _MyAppState extends State<MyApp> {
     box1 = await Hive.openBox<UserM>('userss');
     box2 = await Hive.openBox<Activity>('activitiess');
     box3 = await Hive.openBox<Segment>('segments');
-    /*Hive.deleteBoxFromDisk('userss');
-    Hive.deleteBoxFromDisk('activitiess');
-    Hive.deleteBoxFromDisk('users');
-    Hive.deleteBoxFromDisk('activities');
-    Hive.deleteBoxFromDisk('segments');*/
+    //Hive.deleteBoxFromDisk('userss');
+    //Hive.deleteBoxFromDisk('activitiess');
+    //Hive.deleteBoxFromDisk('users');
+    //Hive.deleteBoxFromDisk('activities');
+    //Hive.deleteBoxFromDisk('segments');
   }
 
   @override

@@ -98,7 +98,7 @@ class _ActivitydetailState extends State<Activitydetail> {
             boxseg.add(s);
           },
           backgroundColor: Colors.white,
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add, color: Colors.cyan,),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -168,7 +168,7 @@ class _ActivitydetailState extends State<Activitydetail> {
                 builder: (BuildContext context, state) {
                   return RangeSlider(
                     values: indexRange,
-                    divisions: _route.isEmpty ? 1 : _route.length - 1,
+                    divisions: _route.length <= 1 ? 1 : _route.length - 1,
                     min: 0,
                     max: _route.length - 1,
                     onChanged: (values) {
@@ -192,67 +192,66 @@ class _ActivitydetailState extends State<Activitydetail> {
                   );
                 },
               ),
-            ),
-            Center(
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.all(20),
-                alignment: Alignment.centerLeft,
-                width: 300,
-                height: 230,
-                decoration: BoxDecoration(
-                  color: const Color(0xCCFFFFFF),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Type of activity:',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    Text(widget.act!.type! ? 'Running' : 'Cycling',
-                      style: const TextStyle(color: Colors.black, fontSize: 20)
-                    ),
-                    const Text('Date:',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    Text(widget.act!.dateStart.toString().substring(0 ,10),
-                      style: const TextStyle(color: Colors.black, fontSize: 20)
-                    ),
-                    const Text('Duration: ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    Text(differenceTime.toString().substring(0, 7),
-                      style:const TextStyle(color: Colors.black, fontSize: 20)
-                    ),
-                    const Text('Distance: ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    Text('${widget.act!.getDistance()} KM',
-                      style: const TextStyle(color: Colors.black, fontSize: 20)
-                    ),
-                  ],
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
+                  alignment: Alignment.centerLeft,
+                  width: 300,
+                  height: 230,
+                  decoration: BoxDecoration(
+                    color: const Color(0xCCFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Type of activity:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        )
+                      ),
+                      Text(widget.act!.type! ? 'Running' : 'Cycling',
+                        style: const TextStyle(color: Colors.black, fontSize: 20)
+                      ),
+                      const Text('Date:',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        )
+                      ),
+                      Text(widget.act!.dateStart.toString().substring(0 ,10),
+                        style: const TextStyle(color: Colors.black, fontSize: 20)
+                      ),
+                      const Text('Duration: ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        )
+                      ),
+                      Text(differenceTime.toString().substring(0, 7),
+                        style:const TextStyle(color: Colors.black, fontSize: 20)
+                      ),
+                      const Text('Distance: ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        )
+                      ),
+                      Text('${widget.act!.getDistance()} KM',
+                        style: const TextStyle(color: Colors.black, fontSize: 20)
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           )
-        )
         )
       )
     );
