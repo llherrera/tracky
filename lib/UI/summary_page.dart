@@ -150,8 +150,6 @@ class _SummaryPageState extends State<SummaryPage> {
                     target: LatLng(_route.last.latitude, _route.last.longitude),
                     zoom: 17,
                   ),
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
                   zoomControlsEnabled: false,
                   mapType: MapType.normal,
                   compassEnabled: true,
@@ -192,7 +190,7 @@ class _SummaryPageState extends State<SummaryPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 40),
                 child: Text(
-                  'M: ${widget.act!.getDistance().toString()} M',
+                  'Distance: ${widget.act!.getDistance().toString()} KM',
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,

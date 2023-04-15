@@ -6,23 +6,30 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFF4093CE),
-            Color(0xFF9BCEF3),
-          ],
+    return SafeArea(
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF4093CE),
+              Color(0xFF9BCEF3),
+            ],
+          ),
         ),
-      ),
-      child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          body: SingleChildScrollView(
+          // Agregado el widget SingleChildScrollView
+          reverse: true, 
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context)
+                  .viewInsets
+                  .bottom), 
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               ClipPath(
@@ -43,7 +50,7 @@ class LoginPage extends StatelessWidget {
                   'Tracky',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 50,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold
                   ),
                 ),
@@ -62,6 +69,7 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
+        )
       )
     );
   }
