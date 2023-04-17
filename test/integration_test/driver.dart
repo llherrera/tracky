@@ -1,4 +1,3 @@
-_
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,4 +74,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
