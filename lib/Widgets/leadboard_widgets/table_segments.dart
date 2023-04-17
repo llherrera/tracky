@@ -12,15 +12,10 @@ class TableSegments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var boxSegm = Hive.box<Segment>('segments');
-<<<<<<< HEAD
-    return Column(children: <Widget>[
-      Container(
-=======
     if (boxSegm.isNotEmpty) {
       return Column(
       children: <Widget>[
         Container(
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -35,26 +30,15 @@ class TableSegments extends StatelessWidget {
               Text('Best Time',
                   style: TextStyle(color: Color(0xFFCCCCCC), fontSize: 20)),
             ],
-<<<<<<< HEAD
-          )),
-      ListView.builder(
-=======
           )
         ),
         ListView.builder(//construye cada segmento
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
           physics: const NeverScrollableScrollPhysics(),
           //reverse: true,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: boxSegm.length,
           itemBuilder: (context, index) {
-<<<<<<< HEAD
-            return Container(
-                child: SegmentPositions(s: boxSegm.get(index), i: index));
-          })
-    ]);
-=======
             return Column(
               children: [
                 Text('Segment $index', style: const TextStyle(color: Colors.white, fontSize: 20)),
@@ -72,7 +56,6 @@ class TableSegments extends StatelessWidget {
         )
       );
     }
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
   }
 }
 
@@ -86,62 +69,6 @@ class SegmentPositions extends StatefulWidget {
 }
 
 class _SegmentPositionsState extends State<SegmentPositions> {
-<<<<<<< HEAD
-  @override
-  Widget build(BuildContext context) {
-    var boxSegm = Hive.box<Segment>('segments');
-    var boxAct = Hive.box<Segment>('activitiess');
-    var boxUser = Hive.box<Segment>('userss');
-    /*for (int j = 0; j < boxAct.length; j++) {
-      if () {
-
-      }
-    }
-    var acts = boxSegm.getActivities();
-    */final segm = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Segment ${widget.i}',
-            style: TextStyle(color: Colors.white, fontSize: 20)),
-        ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            reverse: true,
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: boxSegm.length,
-            itemBuilder: (context, index) {
-              //return Container(child: SegmentPositions(s: boxSegm.get(index)));
-            }),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const <Widget>[
-            Text('User 1', style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Avg Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Best Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const <Widget>[
-            Text('User 1', style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Avg Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Best Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const <Widget>[
-            Text('User 1', style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Avg Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            Text('Best Time 1',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-          ],
-=======
   var boxActs = Hive.box<Activity>('activitiess');
   var boxUser = Hive.box<UserM>('userss');
 
@@ -194,7 +121,6 @@ class _SegmentPositionsState extends State<SegmentPositions> {
               ],
             );
           }
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
         ),
       ],
     );

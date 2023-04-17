@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:hive/hive.dart';
-import '../Data/segment.dart';
-=======
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
 import '../Widgets/activity_widgets/choose_activity.dart';
 import '../Widgets/leadboard_widgets/table_segments.dart';
 
@@ -47,18 +42,9 @@ class _LeaderboardState extends State<Leaderboard> {
                 margin: const EdgeInsets.only(top: 20),
                 child: SelectActivity(isWalk: true, callback: _setIsWalk,),
               ),
-<<<<<<< HEAD
-              /*Container(
-                margin: const EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 20),
-                child: const SearchField(),
-              ),*/
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-=======
               const SizedBox(height: 20,),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
->>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
                 child: const TableSegments(),
               )
             ],
