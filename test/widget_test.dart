@@ -13,7 +13,11 @@ void main() {
     testWidgets('1) Crear Actividad', (WidgetTester tester) async {});
     testWidgets(
         '2) Listar todas las actividades', (WidgetTester tester) async {});
-    testWidgets('3) Ver detalles actividad', (WidgetTester tester) async {});
+    testWidgets('3) Ver detalles actividad', (WidgetTester tester) async {
+      Activity activity = Activity();
+      await tester.pumpWidget(const GetMaterialApp(home: Activitydetail())),
+      expect(find.text('Activity#1'), findsOneWidget);
+    });
     testWidgets(
         '4) Crear actividad multisusuarios', (WidgetTester tester) async {});
     testWidgets('5) Guardar actividad', (WidgetTester tester) async {});
