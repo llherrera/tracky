@@ -40,6 +40,7 @@ class Activity{
         routeList[i + 1].longitude,
       );
     }
+    distance = double.parse((distance / 1000).toStringAsFixed(3));
     return distance;
   }
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
-
+import 'package:tracky/Data/activity.dart';
+import 'package:tracky/Data/user_model.dart';
+import 'package:collection/collection.dart';
 import '../../Data/segment.dart';
 
 class TableSegments extends StatelessWidget {
@@ -9,8 +12,15 @@ class TableSegments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var boxSegm = Hive.box<Segment>('segments');
+<<<<<<< HEAD
     return Column(children: <Widget>[
       Container(
+=======
+    if (boxSegm.isNotEmpty) {
+      return Column(
+      children: <Widget>[
+        Container(
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -25,18 +35,44 @@ class TableSegments extends StatelessWidget {
               Text('Best Time',
                   style: TextStyle(color: Color(0xFFCCCCCC), fontSize: 20)),
             ],
+<<<<<<< HEAD
           )),
       ListView.builder(
+=======
+          )
+        ),
+        ListView.builder(//construye cada segmento
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
           physics: const NeverScrollableScrollPhysics(),
-          reverse: true,
+          //reverse: true,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: boxSegm.length,
           itemBuilder: (context, index) {
+<<<<<<< HEAD
             return Container(
                 child: SegmentPositions(s: boxSegm.get(index), i: index));
           })
     ]);
+=======
+            return Column(
+              children: [
+                Text('Segment $index', style: const TextStyle(color: Colors.white, fontSize: 20)),
+                SegmentPositions(s: boxSegm.getAt(index) ,i: index)
+              ]
+            );
+          }
+        )
+      ]
+    );} else {
+      return const Center(
+        child: Text(
+          'No segments added',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        )
+      );
+    }
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
   }
 }
 
@@ -50,6 +86,7 @@ class SegmentPositions extends StatefulWidget {
 }
 
 class _SegmentPositionsState extends State<SegmentPositions> {
+<<<<<<< HEAD
   @override
   Widget build(BuildContext context) {
     var boxSegm = Hive.box<Segment>('segments');
@@ -104,6 +141,60 @@ class _SegmentPositionsState extends State<SegmentPositions> {
             Text('Best Time 1',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
           ],
+=======
+  var boxActs = Hive.box<Activity>('activitiess');
+  var boxUser = Hive.box<UserM>('userss');
+
+  List<Activity> getActivities(Segment segment) {
+    List<Activity> acts = [];
+    for (var act in boxActs.values) {
+      int temp = 0;
+      for (var j in act.routeList) {
+        for (var k in segment.routeList) {
+          double dist = Geolocator.distanceBetween(
+            k.latitude,
+            k.longitude,
+            j.latitude,
+            j.longitude);
+          if (dist < 10) {
+            temp+=1;
+          }
+        }
+      }
+      if (temp > segment.routeList.length/2) {
+        acts.add(act);
+      }
+    }
+    return acts;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Activity> acts = getActivities(widget.s!);
+    Map<String, List<Activity>> groupAct = groupBy<Activity, String>(acts, (a) => a.userName);
+    final segm = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ListView.builder(//construye cada usuario, saca el avg y el best de cada usuario
+          physics: const NeverScrollableScrollPhysics(),
+          reverse: true,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: groupAct.length,
+          itemBuilder: (context, index) {
+            Iterable<Duration> times = groupAct[groupAct.keys.elementAt(index)]!.map((e) => e.getDuration());
+            double avg = times.map((time) => time.inMinutes).reduce((a, b) => a+b)/times.length;
+            Duration min = times.reduce((a, b) => a.compareTo(b) < 0 ? a : b);
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(groupAct.keys.elementAt(index), style: const TextStyle(color: Colors.white, fontSize: 20)),
+                Text(avg.toString(), style: const TextStyle(color: Colors.white, fontSize: 20)),
+                Text(min.toString().substring(0, 7), style: const TextStyle(color: Colors.white, fontSize: 20)),
+              ],
+            );
+          }
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
         ),
       ],
     );

@@ -1,13 +1,20 @@
+import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'Data/activity.dart';
-import 'Data/position.g.dart';
-import 'Data/segment.dart';
-import 'Data/user.dart';
-import 'Data/user_model.dart';
-import 'UI/login_page.dart';
+import 'package:tracky/Data/activity.dart';
+import 'package:tracky/Data/position.g.dart';
+import 'package:tracky/Data/segment.dart';
+import 'package:tracky/Data/user.dart';
+import 'package:tracky/Data/user_model.dart';
+import 'package:tracky/UI/login_page.dart';
+import 'package:tracky/Data/activity.dart';
+import 'package:tracky/Data/position.g.dart';
+import 'package:tracky/Data/segment.dart';
+import 'package:tracky/Data/user.dart';
+import 'package:tracky/Data/user_model.dart';
+import 'package:tracky/UI/login_page.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
@@ -17,8 +24,13 @@ void main() async {
   Hive.registerAdapter(ActivityAdapter());
   Hive.registerAdapter(SegmentAdapter());
   await Hive.initFlutter();
-    SystemChrome.setPreferredOrientations([  
-    DeviceOrientation.portraitUp,  DeviceOrientation.portraitDown,]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  enableFlutterDriverExtension();
+
   runApp(
     MultiProvider(
       providers: [
@@ -51,11 +63,6 @@ class _MyAppState extends State<MyApp> {
     box1 = await Hive.openBox<UserM>('userss');
     box2 = await Hive.openBox<Activity>('activitiess');
     box3 = await Hive.openBox<Segment>('segments');
-    //Hive.deleteBoxFromDisk('userss');
-    //Hive.deleteBoxFromDisk('activitiess');
-    //Hive.deleteBoxFromDisk('users');
-    //Hive.deleteBoxFromDisk('activities');
-    //Hive.deleteBoxFromDisk('segments');
   }
 
   @override

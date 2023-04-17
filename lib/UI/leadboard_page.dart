@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:hive/hive.dart';
 import '../Data/segment.dart';
+=======
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
 import '../Widgets/activity_widgets/choose_activity.dart';
-import '../Widgets/leadboard_widgets/search_field.dart';
 import '../Widgets/leadboard_widgets/table_segments.dart';
 
 class Leaderboard extends StatefulWidget {
@@ -13,7 +15,6 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  //const Leaderboard({super.key});
   // ignore: unused_field
   bool _isWalk = true;
   void _setIsWalk(bool isWalk) {
@@ -21,17 +22,6 @@ class _LeaderboardState extends State<Leaderboard> {
       _isWalk = isWalk;
     });
   }
-
-  Future<void> _viewSeg() async {
-    var boxSegm = Hive.box<Segment>('segments');
-    final seg = boxSegm.get(boxSegm.length - 1);
-    print(seg!.start);
-    for(int i = 0; i < seg.routeList.length; i++){
-      print(seg.routeList[i]);
-    }
-    print(seg.end);
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,24 +47,22 @@ class _LeaderboardState extends State<Leaderboard> {
                 margin: const EdgeInsets.only(top: 20),
                 child: SelectActivity(isWalk: true, callback: _setIsWalk,),
               ),
+<<<<<<< HEAD
               /*Container(
                 margin: const EdgeInsets.only(top: 20, left: 30, right: 30, bottom: 20),
                 child: const SearchField(),
               ),*/
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
+=======
+              const SizedBox(height: 20,),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+>>>>>>> 6734dff7df77f372fb63bd6c72f0e05830da60ab
                 child: const TableSegments(),
               )
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            //Get.to(const SaveSegment());
-            //_viewSeg();
-          },
-          backgroundColor: Colors.blue,
-          child: const Icon(Icons.add),
         ),
       )
     );

@@ -65,7 +65,7 @@ class _StartButtonState extends State<StartButton> {
       positionStream!.cancel();
       Activity a = Activity(start, DateTime.now(), typeA, userLog!.name, _routeList);
       await boxAct.add(a);
-      Get.to(() => const SummaryPage());
+      Get.to(() => SummaryPage(act: a));
     }
     setState(() {
       _isPressed = !_isPressed;

@@ -13,4 +13,16 @@ class Segment  extends HiveObject{
   List<Position> routeList;
 
   Segment(this.start, this.end, this.routeList);
+
+  Duration getDuration() {
+    return end.timestamp!.difference(start.timestamp!);
+  }
+
+  double getSpeed() {
+    double speed=0;
+    for (var e in routeList) {
+      speed+=e.speed;
+    }
+    return speed/routeList.length;
+  }
 }
